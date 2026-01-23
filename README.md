@@ -1,4 +1,69 @@
-### 3. Set Up Environment Variables
+# PharmaSupply Blockchain
+
+A decentralized pharmaceutical supply chain management system built with Node.js, React, and Hardhat. This application leverages blockchain technology to ensure transparency and traceability of pharmaceutical products from manufacturing to delivery.
+
+## Table of Contents
+
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Variables](#environment-variables)
+- [Running the Full Stack](#running-the-full-stack)
+  - [Option 1: Using the Application Manager (Recommended)](#option-1-using-the-application-manager-recommended)
+  - [Option 2: Running Services Manually](#option-2-running-services-manually)
+- [Viewing Blockchain Transactions](#viewing-blockchain-transactions)
+- [How to Use the Application](#how-to-use-the-application)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Author](#author)
+
+## Features
+
+- **Decentralized Product Tracking:** Trace pharmaceutical products on a blockchain.
+- **Supply Chain Transparency:** Immutable record of product status changes (Created, InTransit, Delivered, Canceled).
+- **User Authentication & Authorization:** Secure access for different user roles.
+- **Product Management:** Create, view, and update pharmaceutical product details.
+- **Order Management:** Process and track product orders.
+- **Blockchain Wallet Generation:** Users can generate and manage their Ethereum wallets.
+- **Transaction History:** View detailed blockchain transaction history within the application.
+- **Comprehensive API:** RESTful API with Swagger documentation for easy integration.
+- **End-to-End Testing:** Robust testing suite for all components.
+
+## Project Structure
+
+This project is a monorepo containing several interconnected services:
+
+- `backend/`: Node.js (Express) API for user management, product data, and blockchain interaction.
+- `frontend/`: React.js application providing the user interface.
+- `web3/`: Hardhat project for smart contract development, deployment, and interaction.
+- `e2e-tests/`: End-to-end tests for the entire application.
+- `manager/`: A CLI-based GUI for managing all services (start, stop, deploy, seed).
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- npm (v9 or later)
+- Git
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Ramius-arch/pharmasupply-blockchain.git
+    cd pharmasupply-blockchain
+    ```
+2.  **Install dependencies:**
+    From the project root, install dependencies for all workspaces:
+    ```bash
+    npm install
+    ```
+
+### Environment Variables
+
 #### Backend
 Create a `.env` file in the `backend` directory based on `.env.example`:
 ```
@@ -11,11 +76,12 @@ DEV_PRIVATE_KEY="0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2f
 ```
 **Note:** Ensure your `MONGODB_URI` points to a running MongoDB instance.
 
-### 4. Running the Full Stack
+## Running the Full Stack
 
 There are two ways to run the application:
 
-#### Option 1: Using the Application Manager (Recommended)
+### Option 1: Using the Application Manager (Recommended)
+
 A CLI-based GUI is provided to easily manage all the services.
 
 To start the manager, run the following command from the root of the project:
@@ -29,9 +95,9 @@ This will open an interactive menu that allows you to:
 - Seed the database.
 - View the status of all services.
 
-#### Option 2: Running Services Manually
+### Option 2: Running Services Manually
 
-##### Step 1: Start the Local Blockchain
+#### Step 1: Start the Local Blockchain
 In a new terminal, navigate to the `web3` directory and start the Hardhat local network:
 ```bash
 cd web3
@@ -39,7 +105,7 @@ npx hardhat node
 ```
 Keep this terminal open. All blockchain transactions will be logged in this terminal.
 
-##### Step 2: Deploy the Smart Contract
+#### Step 2: Deploy the Smart Contract
 In another new terminal, navigate to the `web3` directory and deploy the smart contract:
 ```bash
 cd web3
@@ -47,7 +113,7 @@ npx hardhat run scripts/deploy.js --network localhost
 ```
 This will create a `contract-address.json` file in the `web3` directory. The backend will automatically use the address and ABI from this file.
 
-##### Step 3: Run the Demo Transaction Generation Script (after contract deployment)
+#### Step 3: Run the Demo Transaction Generation Script (after contract deployment)
 In another new terminal, navigate to the `web3` directory and run the script to generate approximately 300 demo transactions:
 ```bash
 cd web3
@@ -55,7 +121,7 @@ npx hardhat run scripts/generate-demo-transactions.js --network localhost
 ```
 This script will create 150 new products and update the status of 150 of these products on the blockchain. It now correctly parses events for Ethers.js v6. You should see logs of transaction hashes and item IDs/statuses being created/updated in the Hardhat node terminal.
 
-##### Step 4: Seed the Database
+#### Step 4: Seed the Database
 In another new terminal, navigate to the `backend` directory and run the seeding script:
 ```bash
 cd backend
@@ -63,14 +129,14 @@ npm run seed
 ```
 **Note on Product Images**: The seed script currently populates products with placeholder images from `picsum.photos`. To fully realize the "pharmaceutical ad with Kodak film feel" theme, you will need to replace these placeholder URLs in `backend/seeders/seed.js` with URLs of your chosen themed images. Remember to re-run `npm run seed` and restart your backend after making changes to `seed.js`.
 
-##### Step 5: Start the Backend and Frontend
+#### Step 5: Start the Backend and Frontend
 In another new terminal, from the root of the project, run:
 ```bash
 npm run dev
 ```
 The backend will run on `http://localhost:3000` and the frontend on `http://localhost:5173`.
 
-### Viewing Blockchain Transactions
+## Viewing Blockchain Transactions
 
 You can view blockchain transactions in a couple of ways:
 
@@ -80,7 +146,7 @@ You can view blockchain transactions in a couple of ways:
     *   You would typically run Blockscout (or an Etherscan-like explorer) in a Docker container and configure it to connect to your Hardhat node's RPC URL (`http://localhost:8545`).
     *   This provides a web interface where you can search by transaction hash, block number, address, and view event logs. Instructions for setting up Blockscout with a local Hardhat network are typically found in Blockscout's official documentation.
 
-### How to Use the Application
+## How to Use the Application
 
 1.  **Create an Account:**
     -   Navigate to `http://localhost:5173/register` and create a new account.
@@ -148,3 +214,7 @@ The `e2e-tests` directory contains scripts to test the full-stack application by
     npm run verify-products
     ```
     This will read the `products.json` file, fetch the data for each product from the backend API, and verify that it matches.
+
+## Author
+
+- Ramius_arch
