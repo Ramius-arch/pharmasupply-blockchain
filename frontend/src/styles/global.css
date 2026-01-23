@@ -1,0 +1,191 @@
+/* Base styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Theme Variables - Modern & Minimalist Aesthetic */
+body.light-theme {
+  --primary: #4285F4;   /* Google Blue for primary actions */
+  --primary-hover: #357AE8; /* Slightly darker primary for hover */
+  --secondary: #34A853; /* Google Green for secondary/success */
+  --secondary-hover: #2B8C45; /* Slightly darker secondary for hover */
+  --success: #34A853;
+  --danger: #EA4335;    /* Google Red for danger */
+  --warning: #FBBC04;   /* Google Yellow for warning */
+  --info: #4285F4;      /* Use primary blue for info */
+  
+  --background: #F0F2F5; /* Very light, subtle page background */
+  --surface: #FFFFFF; /* Pure white for cards/panels, with subtle shadow */
+  --text-primary: #202124; /* Dark but not black for main text */
+  --text-secondary: #5F6368; /* Muted gray for secondary text */
+  --border: #DADCE0; /* Very light gray for subtle borders */
+  --shadow: rgba(0, 0, 0, 0.08); /* Soft, diffused shadow */
+  --primary-focus-shadow: rgba(66, 133, 244, 0.25); /* Focus shadow using primary blue */
+  
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+/* Dark Theme Variables - Modern & Minimalist Aesthetic */
+body.dark-theme {
+  --primary: #8AB4F8;   /* Google Blue for dark theme contrast */
+  --primary-hover: #6C9AF5; /* Slightly darker primary for hover */
+  --secondary: #6DD77C; /* Google Green for dark theme contrast */
+  --secondary-hover: #56B366; /* Slightly darker secondary for hover */
+  --success: #6DD77C;
+  --danger: #F28B82;    /* Google Red for dark theme */
+  --warning: #FDD663;   /* Google Yellow for dark theme */
+  --info: #8AB4F8;      /* Use primary blue for info */
+
+  --background: #1A202C; /* Deep, rich dark background */
+  --surface: #2D3748; /* Slightly lighter dark surface for cards/panels */
+  --text-primary: #E8EAED; /* Off-white for main text */
+  --text-secondary: #BDC1C6; /* Light gray for secondary text */
+  --border: #4A5568; /* Subtle dark gray border */
+  --shadow: rgba(0, 0, 0, 0.4); /* Darker shadow for depth */
+  --primary-focus-shadow: rgba(138, 180, 248, 0.25); /* Focus shadow using primary blue */
+
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+/* Navy Blue Theme Variables */
+body.navy-theme {
+  --primary: #66CCFF;   /* Brighter blue for primary actions */
+  --primary-hover: #4FB0E0; /* Slightly darker primary for hover */
+  --secondary: #2ECC71; /* Vibrant green for secondary/success */
+  --secondary-hover: #27AE60; /* Slightly darker secondary for hover */
+  --success: #2ECC71;
+  --danger: #FF6B6B;    /* Red for danger */
+  --warning: #FFD166;   /* Yellow for warning */
+  --info: #66CCFF;      /* Use primary blue for info */
+
+  --background: #001F3F; /* Classic Navy Blue background */
+  --surface: #003366; /* Slightly lighter navy for cards/panels */
+  --text-primary: #E0EBF5; /* Very light blue-gray for main text */
+  --text-secondary: #A9C2D6; /* Lighter blue-gray for secondary text */
+  --border: #004080; /* Medium navy for borders */
+  --shadow: rgba(0, 0, 0, 0.5); /* Dark shadow for depth */
+  --primary-focus-shadow: rgba(102, 204, 255, 0.25); /* Focus shadow using primary blue */
+
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+/* Responsive design */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-color: var(--surface);
+  box-shadow: 0 2px 4px var(--shadow);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav li {
+  margin-left: 20px;
+}
+
+nav a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 4px;
+  background-color: var(--primary);
+  color: white; /* Static white for primary buttons */
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 1px solid var(--primary);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--primary-hover); /* Needs new var for hover */
+  border-color: var(--primary-hover); /* Needs new var for hover */
+}
+
+/* Form element base styling */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="month"],
+input[type="tel"],
+select,
+textarea {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-focus-shadow);
+}
+
+/* Card base styling */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px var(--shadow);
+  padding: 20px;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+/* Utility classes - for text and backgrounds */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.bg-dark { background-color: var(--dark); }
+.bg-light { background-color: var(--light); }

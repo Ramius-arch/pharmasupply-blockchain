@@ -1,0 +1,1008 @@
+openapi: 3.0.1
+info:
+  title: Pharmaceutical Supply Chain API
+  description: API for managing a pharmaceutical supply chain, leveraging blockchain for transparency.
+  version: "1.0"
+  contact:
+    name: Your Company Name
+    email: support@example.com
+
+servers:
+  - url: http://localhost:3000/api
+    description: Development server
+
+tags:
+  - name: Authentication
+    description: User authentication and authorization operations
+  - name: Users
+    description: Operations related to user management
+  - name: Products
+    description: Operations related to product management
+  - name: Suppliers
+    description: Operations related to supplier management
+  - name: Orders
+    description: Operations related to order management
+  - name: Blockchain
+    description: Operations for interacting with the blockchain layer
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      description: Create an account with first name, last name, email, and password. Default role is 'user'.
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - firstName
+                - lastName
+                - email
+                - password
+              properties:
+                firstName:
+                  type: string
+                  description: User's first name
+                lastName:
+                  type: string
+                  description: User's last name
+                email:
+                  type: string
+                  format: email
+                  description: User's email address
+                password:
+                  type: string
+                  minlength: 6
+                  description: User's password (min 6 characters)
+                role:
+                  type: string
+                  enum: [admin, supplier, user]
+                  default: user
+                  description: User's role (admin, supplier, or user)
+      responses:
+        201:
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSuccessResponse'
+        400:
+          description: Bad request (validation errors, e.g., email already exists, invalid password format)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/login:
+    post:
+      summary: Login with email and password
+      description: Authenticate user and generate JWT token
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: User's email address
+                password:
+                  type: string
+                  description: User's password
+      responses:
+        200:
+          description: Login successful, token and user data returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSuccessResponse'
+        401:
+          description: Unauthorized (invalid credentials)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/logout:
+    post:
+      summary: Logout user
+      description: Invalidate user session (client-side token deletion)
+      tags: [Authentication]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Logout successful (client should delete token)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Logout successful. Please delete your token."
+
+  /users/profile:
+    get:
+      summary: Get authenticated user's profile
+      description: Retrieve details of the currently authenticated user.
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: User profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        401:
+          description: Unauthorized
+        404:
+          description: User not found
+
+    put:
+      summary: Update authenticated user's profile
+      description: Update details of the currently authenticated user.
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserProfileRequest'
+      responses:
+        200:
+          description: User profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        401:
+          description: Unauthorized
+        404:
+          description: User not found
+
+  /users/{userId}:
+    get:
+      summary: Get user profile by ID (Admin/Supplier only)
+      description: Retrieve details of a specific user by their ID. Accessible by Admins and Suppliers.
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the user to retrieve
+      responses:
+        200:
+          description: User details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+        404:
+          description: User not found
+
+    put:
+      summary: Update user profile by ID (Admin/Supplier only)
+      description: Update details of a specific user by their ID. Accessible by Admins and Suppliers.
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the user to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserProfileRequest'
+      responses:
+        200:
+          description: User profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+        404:
+          description: User not found
+
+  /products:
+    get:
+      summary: Get all products
+      description: Retrieve a list of all available products.
+      tags: [Products]
+      responses:
+        200:
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+    post:
+      summary: Create a new product (Admin/Supplier only)
+      description: Add a new product to the inventory.
+      tags: [Products]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProductRequest'
+      responses:
+        201:
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+
+  /products/{productId}:
+    get:
+      summary: Get product by ID
+      description: Retrieve a single product by its ID.
+      tags: [Products]
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the product to retrieve
+      responses:
+        200:
+          description: Product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Product not found
+
+    put:
+      summary: Update product by ID (Admin/Supplier only)
+      description: Update details of an existing product.
+      tags: [Products]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the product to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductRequest'
+      responses:
+        200:
+          description: Product updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+        404:
+          description: Product not found
+
+    delete:
+      summary: Delete product by ID (Admin/Supplier only)
+      description: Remove a product from the inventory.
+      tags: [Products]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the product to delete
+      responses:
+        204:
+          description: Product deleted successfully (No Content)
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+        404:
+          description: Product not found
+
+  /orders:
+    get:
+      summary: Get all orders (Admin only)
+      description: Retrieve a list of all orders in the system.
+      tags: [Orders]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: A list of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+
+    post:
+      summary: Create a new order (Authenticated user)
+      description: Place a new order with a list of products.
+      tags: [Orders]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrderRequest'
+      responses:
+        201:
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        401:
+          description: Unauthorized
+        400:
+          description: Bad request (validation errors)
+
+  /orders/my-orders:
+    get:
+      summary: Get current user's orders
+      description: Retrieve a list of orders placed by the currently authenticated user.
+      tags: [Orders]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: A list of user's orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        401:
+          description: Unauthorized
+
+  /orders/{orderId}:
+    get:
+      summary: Get order by ID
+      description: Retrieve a single order by its ID. Accessible by admin or the order owner.
+      tags: [Orders]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the order to retrieve
+      responses:
+        200:
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+        404:
+          description: Order not found
+
+  /orders/{orderId}/status:
+    put:
+      summary: Update order status (Admin only)
+      description: Update the status of a specific order.
+      tags: [Orders]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the order to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum: [pending, processing, shipped, delivered, cancelled]
+                  description: New status of the order
+      responses:
+        200:
+          description: Order status updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+        404:
+          description: Order not found
+
+  /suppliers:
+    get:
+      summary: Get all suppliers
+      description: Retrieve a list of all registered suppliers.
+      tags: [Suppliers]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: A list of suppliers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier'
+        401:
+          description: Unauthorized
+
+    post:
+      summary: Create a new supplier (Admin only)
+      description: Register a new supplier in the system.
+      tags: [Suppliers]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewSupplierRequest'
+      responses:
+        201:
+          description: Supplier created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+
+  /suppliers/{supplierId}:
+    get:
+      summary: Get supplier by ID
+      description: Retrieve a single supplier by their ID.
+      tags: [Suppliers]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: supplierId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the supplier to retrieve
+      responses:
+        200:
+          description: Supplier details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        401:
+          description: Unauthorized
+        404:
+          description: Supplier not found
+
+    put:
+      summary: Update supplier by ID (Admin only)
+      description: Update details of an existing supplier.
+      tags: [Suppliers]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: supplierId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the supplier to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSupplierRequest'
+      responses:
+        200:
+          description: Supplier updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+        404:
+          description: Supplier not found
+
+    delete:
+      summary: Delete supplier by ID (Admin only)
+      description: Remove a supplier from the system.
+      tags: [Suppliers]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: supplierId
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+          description: ID of the supplier to delete
+      responses:
+        204:
+          description: Supplier deleted successfully (No Content)
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden (Insufficient permissions)
+        404:
+          description: Supplier not found
+
+  /blockchain/item/{itemId}:
+    get:
+      summary: Get blockchain item details by ID
+      description: Retrieve details of a specific item from the blockchain.
+      tags: [Blockchain]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: string
+          description: ID of the blockchain item to retrieve
+      responses:
+        200:
+          description: Blockchain item details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockchainItemDetails'
+        401:
+          description: Unauthorized
+        404:
+          description: Blockchain item not found
+
+  /blockchain/item/{itemId}/history:
+    get:
+      summary: Get blockchain item status history by ID
+      description: Retrieve the history of status changes for a specific item from the blockchain.
+      tags: [Blockchain]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: string
+          description: ID of the blockchain item to retrieve history for
+      responses:
+        200:
+          description: Blockchain item status history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlockchainStatusUpdate'
+        401:
+          description: Unauthorized
+        404:
+          description: Blockchain item history not found
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Enter your JWT Bearer token in the format 'Bearer {token}'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Error message details"
+        stack:
+          type: string
+          example: "Stack trace details (only in development)"
+
+    AuthSuccessResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Login successful"
+        data:
+          type: object
+          properties:
+            _id:
+              type: string
+              format: ObjectId
+            firstName:
+              type: string
+            lastName:
+              type: string
+            email:
+              type: string
+              format: email
+            role:
+              type: string
+              enum: [admin, supplier, user]
+            token:
+              type: string
+              description: JWT authentication token
+
+    UserProfile:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: ObjectId
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum: [admin, supplier, user]
+      required: [_id, firstName, lastName, email, role]
+
+    UpdateUserProfileRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minlength: 6
+        role:
+          type: string
+          enum: [admin, supplier, user]
+      description: Fields to update for a user profile.
+
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: ObjectId
+        name:
+          type: string
+        description:
+          type: string
+        manufacturer:
+          type: string
+        supplier:
+          type: string
+          format: ObjectId
+          description: ID of the supplier of this product
+        category:
+          type: string
+        unitPrice:
+          type: number
+        quantityInStock:
+          type: integer
+        dosageForm:
+          type: string
+        strength:
+          type: string
+        pharmaceuticalCode:
+          type: string
+        blockchainItemId:
+          type: string
+          description: ID of the item on the blockchain (if tracked)
+      required: [_id, name, supplier, category, unitPrice, quantityInStock]
+
+    NewProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        manufacturer:
+          type: string
+        supplier:
+          type: string
+          format: ObjectId
+          description: ID of the supplier of this product
+        category:
+          type: string
+        unitPrice:
+          type: number
+        quantityInStock:
+          type: integer
+        dosageForm:
+          type: string
+        strength:
+          type: string
+        pharmaceuticalCode:
+          type: string
+      required: [name, supplier, category, unitPrice]
+
+    UpdateProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        manufacturer:
+          type: string
+        category:
+          type: string
+        unitPrice:
+          type: number
+        quantityInStock:
+          type: integer
+        dosageForm:
+          type: string
+        strength:
+          type: string
+        pharmaceuticalCode:
+          type: string
+
+    Supplier:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: ObjectId
+        name:
+          type: string
+        contactPerson:
+          type: string
+        contactEmail:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        licenseNumber:
+          type: string
+        status:
+          type: string
+          enum: [pending, approved, rejected]
+        owner:
+          type: string
+          format: ObjectId
+          description: ID of the user who owns this supplier account
+      required: [_id, name, contactEmail, owner]
+
+    NewSupplierRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        contactPerson:
+          type: string
+        contactEmail:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        licenseNumber:
+          type: string
+        # owner should be set by backend based on authenticated user
+      required: [name, contactEmail]
+
+    UpdateSupplierRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        contactPerson:
+          type: string
+        contactEmail:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        licenseNumber:
+          type: string
+        status:
+          type: string
+          enum: [pending, approved, rejected]
+
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: ObjectId
+        user:
+          type: string
+          format: ObjectId
+          description: ID of the user who placed the order
+        supplier:
+          type: string
+          format: ObjectId
+          description: ID of the supplier of the items in the order
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        totalAmount:
+          type: number
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+        status:
+          type: string
+          enum: [pending, processing, shipped, delivered, cancelled]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required: [_id, user, supplier, items, totalAmount, status]
+
+    OrderItem:
+      type: object
+      properties:
+        product:
+          type: string
+          format: ObjectId
+          description: ID of the product ordered
+        quantity:
+          type: integer
+          min: 1
+      required: [product, quantity]
+
+    NewOrderRequest:
+      type: object
+      properties:
+        supplier:
+          type: string
+          format: ObjectId
+          description: ID of the supplier for this order
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+      required: [supplier, items, shippingAddress]
+
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+      required: [street, city, state, zipCode]
+
+    BlockchainItemDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ID of the item on the blockchain
+        description:
+          type: string
+        status:
+          type: string
+          enum: [Created, InTransit, Delivered, Canceled]
+        lastUpdated:
+          type: string
+          format: date-time
+      required: [id, description, status, lastUpdated]
+
+    BlockchainStatusUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Created, InTransit, Delivered, Canceled]
+        timestamp:
+          type: string
+          format: date-time
+        updater:
+          type: string
+          format: address
+      required: [status, timestamp, updater]

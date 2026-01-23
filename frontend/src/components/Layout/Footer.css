@@ -1,0 +1,47 @@
+/* frontend/src/components/Layout/Footer.css */
+.footer {
+    background-color: var(--dark); /* Use dark variable from global */
+    color: var(--medilazar-text); /* Consistent with theme text color */
+    padding: 1.5rem 0; /* Slightly more padding */
+    text-align: center;
+    box-shadow: 0 -4px 8px var(--shadow); /* Use shadow variable from global */
+    margin-top: auto; /* Pushes footer to the bottom */
+    border-top: 1px solid var(--gray); /* Subtle industrial border */
+}
+
+.footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--medilazar-text);
+}
+
+.footer-nav {
+    margin-top: 0.8rem; /* Slightly more margin */
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* Increased gap */
+}
+
+.footer-links a {
+    color: var(--gray); /* Muted link color */
+    text-decoration: none;
+    font-size: 0.9rem; /* Slightly larger */
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--medilazar-accent); /* Accent color on hover */
+    text-decoration: none; /* No underline on hover */
+}

@@ -1,0 +1,106 @@
+/* frontend/src/components/Home/Home.css - 90s Grunge/Industrial Theme */
+.home-container {
+  font-family: var(--font-family); /* Inherit from global */
+  color: var(--medilazar-text); /* Theme text color */
+  line-height: 1.6;
+  background-color: var(--dark); /* Dark background */
+}
+
+.hero {
+  background-color: var(--light); /* Lighter dark background for hero */
+  padding: 8rem 0; /* Slightly less padding */
+  text-align: center;
+  position: relative;
+  border-bottom: 2px solid var(--primary); /* Industrial border */
+  box-shadow: 0 5px 15px var(--shadow);
+}
+
+.hero .hero-content h1 {
+  color: var(--medilazar-accent); /* Accent for hero heading */
+  font-size: 3.5rem; /* Larger heading */
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
+
+.hero .hero-content p {
+  color: var(--secondary); /* Muted secondary for description */
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.button {
+  /* Inherits from global .btn for consistent styling */
+}
+
+.categories, .featured-products {
+  padding: 4rem 0;
+  text-align: center;
+  background-color: var(--dark); /* Consistent with body */
+}
+
+.categories h2, .featured-products h2 {
+  color: var(--primary); /* Primary color for section titles */
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 3rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.category-grid, .product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly wider cards */
+  gap: 2rem; /* More gap */
+  margin-top: 2rem;
+  padding: 0 20px; /* Padding for grid containers */
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-card, .product-card {
+  border: 1px solid var(--gray); /* Industrial border */
+  border-radius: 0; /* Sharp edges */
+  padding: 1.5rem; /* More padding */
+  text-align: center;
+  background-color: var(--light); /* Lighter dark background for cards */
+  box-shadow: 0 5px 15px var(--shadow); /* Theme shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: auto; /* Allow height to adjust */
+  color: var(--medilazar-text); /* Theme text color */
+}
+
+.category-card:hover, .product-card:hover {
+  transform: translateY(-5px); /* More pronounced lift */
+  box-shadow: 0 8px 20px var(--shadow);
+  border-color: var(--medilazar-accent); /* Accent border on hover */
+}
+
+.category-card img, .product-card img {
+  height: 150px; /* Consistent image height */
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--gray); /* Subtle separator */
+  filter: sepia(0.6) contrast(1.1) grayscale(0.1); /* Film grain effect from ProductCard */
+}
+
+.category-card h3, .product-card h3 {
+  font-size: 1.3rem;
+  color: var(--medilazar-accent); /* Accent for card titles */
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.product-card p {
+  font-size: 1.1rem;
+  color: var(--primary); /* Primary for price */
+  font-weight: bold;
+}
+
+.footer {
+  /* Inherits from global styles */
+}

@@ -1,0 +1,19 @@
+{
+  "name": "pharmasupply-blockchain",
+  "version": "1.0.0",
+  "description": "A pharmaceutical supply chain management system.",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "manager"
+  ],
+  "scripts": {
+    "backend": "npm start --workspace=backend",
+    "frontend": "npm run dev --workspace=frontend",
+    "dev": "concurrently \"npm:backend\" \"npm:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

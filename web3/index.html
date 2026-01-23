@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain DApp</title>
+</head>
+<body>
+    <h1>Supply Chain DApp</h1>
+
+    <h2>Create Item</h2>
+    <input type="text" id="itemDescription" placeholder="Item Description">
+    <button id="createItemBtn">Create Item</button>
+
+    <h2>Item Status</h2>
+    <input type="text" id="itemId" placeholder="Item ID">
+    <button id="getItemBtn">Get Item</button>
+    <div id="itemStatus"></div>
+
+    <h2>Update Item Status</h2>
+    <input type="text" id="updateItemId" placeholder="Item ID">
+    <select id="newStatus">
+        <option value="0">Created</option>
+        <option value="1">In Transit</option>
+        <option value="2">Delivered</option>
+        <option value="3">Canceled</option>
+    </select>
+    <button id="updateItemStatusBtn">Update Status</button>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+    <script src="frontend.js"></script>
+</body>
+</html>

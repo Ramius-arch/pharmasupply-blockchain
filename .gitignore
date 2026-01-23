@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+/package-lock.json
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+lcov-report/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDEs and other tools
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+*.log
+
+# Build artifacts
+dist/
+build/
+out/
+temp/
+tmp/
+
+# Test coverage
+coverage/
+
+# Web3 specific
+web3/artifacts/
+web3/cache/
+web3/contract-address.json
+
+# Frontend specific
+frontend/dist/
+frontend/build/

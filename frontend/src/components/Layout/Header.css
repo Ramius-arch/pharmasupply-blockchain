@@ -1,0 +1,60 @@
+/* frontend/src/components/Layout/Header.css */
+.header {
+    background-color: var(--dark); /* Use dark variable from global */
+    padding: 1rem 0;
+    color: var(--medilazar-text); /* Use medilazar-text for general header text */
+    box-shadow: 0 4px 8px var(--shadow); /* Use shadow variable from global */
+    border-bottom: 1px solid var(--gray); /* Subtle industrial border */
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 0; /* Remove left padding */
+    padding-right: 1rem; /* Keep right padding for navigation */
+}
+
+.header .logo {
+    color: var(--primary); /* Use primary variable for logo */
+    text-decoration: none;
+    font-size: 1.8rem; /* Consistent with global.css */
+    font-weight: bold;
+    text-transform: uppercase; /* Industrial feel */
+    letter-spacing: 2px; /* Consistent with global.css */
+}
+
+.header .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.header .nav-item .nav-link,
+.header .nav-item .logout-btn {
+    color: var(--medilazar-text); /* Link color consistent with medilazar-text */
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0; /* Sharp edges for grunge */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background: none;
+    border: 1px solid transparent; /* Subtle border for interaction */
+    cursor: pointer;
+}
+
+.header .nav-item .nav-link:hover,
+.header .nav-item .logout-btn:hover {
+    background-color: var(--light); /* Lighter background on hover */
+    color: var(--medilazar-accent); /* Accent color on hover */
+    border-color: var(--medilazar-accent);
+}
+
+.header .nav-item .logout-btn {
+    font-size: 1rem;
+    /* Specific styles for logout button if needed */
+}

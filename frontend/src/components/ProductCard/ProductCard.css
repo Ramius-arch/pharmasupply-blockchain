@@ -1,0 +1,98 @@
+/* frontend/src/components/ProductCard/ProductCard.css */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray); /* Use theme gray */
+    border-radius: 0; /* Sharp edges */
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--medilazar-text); /* Theme text color */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: var(--light); /* Darker background for card */
+    position: relative; /* Needed for pseudo-elements */
+}
+
+.product-card:hover {
+    transform: translateY(-3px); /* Subtle lift */
+    box-shadow: 0 6px 15px var(--shadow); /* More pronounced shadow on hover */
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--gray); /* Theme gray border */
+
+    /* Kodak film like feel with color bleeding */
+    filter: sepia(0.6) contrast(1.1) grayscale(0.1); /* Film grain effect */
+    transition: filter 0.3s ease;
+    position: relative;
+    z-index: 1; /* Ensure image is above bleeding effect */
+}
+
+.product-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(var(--primary-rgb), 0.2), /* Muted primary color bleed */
+        rgba(var(--danger-rgb), 0.2), /* Muted danger color bleed */
+        transparent 50%
+    );
+    mix-blend-mode: multiply; /* Blend mode for color bleeding */
+    opacity: 0.7;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.product-details {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-details h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: var(--medilazar-accent); /* Accent color for product name */
+    min-height: 2.4em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-details p {
+    font-size: 1.1rem;
+    color: var(--primary); /* Use primary for price */
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.add-to-cart {
+    background-color: var(--primary); /* Theme primary button */
+    color: white;
+    border: 1px solid var(--primary); /* Consistent border */
+    padding: 8px 15px;
+    border-radius: 0; /* Sharp edges */
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    align-self: flex-start;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.add-to-cart:hover {
+    background-color: var(--secondary); /* Theme secondary on hover */
+    border-color: var(--secondary);
+    color: var(--dark); /* Dark text on hover */
+}

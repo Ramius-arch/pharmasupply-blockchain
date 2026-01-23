@@ -1,0 +1,32 @@
+// Variables
+$primary: #0056B3; // A professional, trustworthy, deep blue
+$secondary: #28A745; // A vibrant, reassuring green
+$accent: #17A2B8; // A slightly brighter, modern teal
+
+$dark-gray: #343A40; // For primary text, shadows, borders
+$content-background: #F8F9FA; // Background for content areas (cards, modals)
+$page-background: #F0F2F5; // Overall page background
+
+$warning: #FFC107; // For warnings, alerts
+$danger: #DC3545; // For errors, critical actions
+
+$shadow: rgba(0, 0, 0, 0.1);
+
+// Typography
+$font-family-headings: 'Montserrat', sans-serif;
+$font-family-body: 'Open Sans', sans-serif;
+
+$font-size-xxl: 2.5rem;
+$font-size-xl: 2rem;
+$font-size-lg: 1.5rem;
+$font-size-md: 1.125rem;
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+
+$line-height-base: 1.6;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
