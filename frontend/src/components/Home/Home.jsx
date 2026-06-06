@@ -19,49 +19,59 @@ const Home = () => {
   return (
     <div className="home-container">
       {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1>Welcome to Our E-Commerce Store</h1>
-          <p>Shop the latest trends and get amazing deals!</p>
-          <Link to="/products" className="button">Explore Now</Link>
+      <section className="hero animate-fade-in">
+        <div className="container">
+          <div className="hero-content">
+            <h1>The Future of Pharma Traceability</h1>
+            <p>Secure, transparent, and decentralized supply chain management for the modern pharmaceutical industry.</p>
+            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+              <Link to="/products" className="btn btn-primary">Browse Catalog</Link>
+              <Link to="/admin" className="btn btn-outline">Admin Portal</Link>
+            </div>
+          </div>
         </div>
-        {/* Add a background image or video here */}
       </section>
 
       {/* Categories Section */}
       <section className="categories">
-        <h2>Shop by Category</h2>
-        <div className="category-grid">
-          {categories.map((category) => (
-            <div key={category.id} className="category-card">
-              <img src={'../../assets/placeholder.png'} alt={category.name} /> {/* Use theme placeholder */}
-              <h3>{category.name}</h3>
+        <div className="container">
+          <h2>Trust through Transparency</h2>
+          <div className="category-grid">
+            <div className="category-card">
+              <div style={{ fontSize: '2rem', color: 'var(--primary)' }}>🛡️</div>
+              <h3>Immutable Records</h3>
+              <p style={{ color: 'var(--text-secondary)' }}>Every movement is logged on the blockchain, ensuring data integrity and authenticity.</p>
             </div>
-          ))}
+            <div className="category-card">
+              <div style={{ fontSize: '2rem', color: 'var(--secondary)' }}>📦</div>
+              <h3>Real-time Tracking</h3>
+              <p style={{ color: 'var(--text-secondary)' }}>Monitor shipment status from manufacturing to final delivery with instant updates.</p>
+            </div>
+            <div className="category-card">
+              <div style={{ fontSize: '2rem', color: 'var(--warning)' }}>⚡</div>
+              <h3>Smart Logistics</h3>
+              <p style={{ color: 'var(--text-secondary)' }}>Automated status transitions and smart contract execution for efficient operations.</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Featured Products Section */}
       <section className="featured-products">
-        <h2>Featured Products</h2>
-        <div className="product-grid">
-          {products.slice(0, 4).map((product) => (
-            <div key={product.id} className="product-card"> {/* Changed from Link to div */}
-              <img src={'../../assets/placeholder.png'} alt={product.name} /> {/* Use theme placeholder */}
-              <h3>{product.name}</h3>
-              <p>${(product.price / 100).toFixed(2)}</p>
-            </div>
-          ))}
-          {/* Add "View All" button here */}
+        <div className="container">
+          <h2>Verified Pharmaceuticals</h2>
+          <div className="product-grid">
+            {products.slice(0, 3).map((product) => (
+              <div key={product.id} className="product-card">
+                <img src={'https://picsum.photos/seed/' + product.id + '/400/300?grayscale'} alt={product.name} />
+                <h3>{product.name}</h3>
+                <div className="price">${(product.price / 100).toFixed(2)}</div>
+                <Link to={`/products/${product.id}`} className="btn btn-outline" style={{ marginTop: '16px', width: '100%' }}>View Details</Link>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-
-      {/* Footer Section */}
-      <footer className="footer">
-        <div className="footer-content">
-          {/* Navigation links, social media icons, copyright info */}
-        </div>
-      </footer>
     </div>
   );
 };

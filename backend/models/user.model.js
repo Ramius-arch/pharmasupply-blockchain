@@ -16,7 +16,8 @@ const UserSchema = new Schema({
     type: String,
     default: 'active',
     enum: ['active', 'inactive', 'pending']
-  }
-});
+  },
+  walletAddress: { type: String, default: null } // Blockchain wallet address
+}, { timestamps: true });
 
 module.exports = mongoose.model('User', UserSchema);

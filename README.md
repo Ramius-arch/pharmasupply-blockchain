@@ -115,7 +115,7 @@ This will create a `contract-address.json` file in the `web3` directory. The bac
 
 #### Step 3: Run the Demo Transaction Generation Script (after contract deployment)
 In another new terminal, navigate to the `web3` directory and run the script to generate approximately 300 demo transactions:
-```bash
+```bash`
 cd web3
 npx hardhat run scripts/generate-demo-transactions.js --network localhost
 ```

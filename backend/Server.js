@@ -1,12 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const swaggerUi = require('swagger-ui-express');
 const yaml = require('yamljs');
 const path = require('path');
 
 // Add this to handle BigInt serialization globally
-BigInt.prototype.toJSON = function() { return this.toString(); };
+BigInt.prototype.toJSON = function () { return this.toString(); };
 
 // Load configuration settings
 const config = require('./config');
@@ -14,11 +16,24 @@ const config = require('./config');
 // Initialize Express app
 const app = express();
 
+// Security headers
+app.use(helmet());
+
+// Rate limiting — 100 requests per 15 minutes per IP
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many requests, please try again later.' }
+});
+app.use('/api', limiter);
+
 // Enable CORS for all routes (for development only)
 app.use(cors());
 
 // Parse JSON request bodies
-app.use(express.json());
+app.use(express.json({ limit: '10kb' })); // Limit body size to prevent abuse
 
 // Serve static files (like images or documents)
 app.use('/uploads', express.static('uploads'));

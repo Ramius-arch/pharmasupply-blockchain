@@ -3,6 +3,7 @@ const router = express.Router();
 const productController = require('../controllers/product.controller');
 const { authenticate } = require('../middleware/auth.middleware');
 const { checkRole } = require('../middleware/role.middleware');
+const { validate, createProductSchema } = require('../middleware/validation.middleware');
 
 // Public routes - anyone can view products
 router.get('/', productController.getAllProducts);
@@ -13,6 +14,7 @@ router.post(
     '/',
     authenticate,
     checkRole(['admin', 'supplier']),
+    validate(createProductSchema),
     productController.createProduct
 );
 

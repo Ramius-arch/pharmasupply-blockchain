@@ -1,59 +1,45 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { useTheme } from '../../context/ThemeContext'; // Import useTheme
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faUserCircle, faBars, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onToggleSidebar }) => {
   const { user, isAuthenticated, logout } = useContext(AuthContext);
-  const { theme, toggleTheme } = useTheme(); // Use the theme context
 
   return (
-    <header className="header">
-      <div className="container">
-        <Link to="/" className="logo">PharmaSupply Chain</Link>
-        <nav className="nav">
-          <ul className="nav-list">
-            <li className="nav-item">
-              <Link to="/products" className="nav-link">Products</Link>
-            </li>
-            {isAuthenticated ? (
-              <>
-                <li className="nav-item">
-                  <Link to="/cart" className="nav-link">Cart</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/my-orders" className="nav-link">My Orders</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/blockchain-transaction" className="nav-link">Transactions</Link>
-                </li>
-                {(user?.role === 'admin' || user?.role === 'supplier') && (
-                  <li className="nav-item">
-                    <Link to="/admin" className="nav-link">Dashboard</Link>
-                  </li>
-                )}
-                <li className="nav-item">
-                  <button onClick={logout} className="nav-link logout-btn">Logout</button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <Link to="/login" className="nav-link">Login</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/register" className="nav-link">Register</Link>
-                </li>
-              </>
-            )}
-            <li className="nav-item theme-toggle"> {/* Added theme toggle */}
-              <button onClick={toggleTheme} className="nav-link">
-                {theme === 'light' ? 'Dark Mode' : theme === 'dark' ? 'Navy Mode' : 'Light Mode'}
+    <header className="app-header">
+      <div className="header-left">
+        <button className="hamburger-btn" onClick={onToggleSidebar}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+        <div className="header-logo desktop-only">
+          <Link to="/">PharmaNet Ledger</Link>
+        </div>
+      </div>
+
+      <div className="header-right">
+        <div className="header-actions">
+          <button className="action-icon" title="Notifications">
+            <FontAwesomeIcon icon={faBell} />
+            <span className="notification-dot"></span>
+          </button>
+          
+          {isAuthenticated ? (
+            <div className="user-profile-menu">
+              <Link to="/profile" className="profile-trigger">
+                <FontAwesomeIcon icon={faUserCircle} />
+                <span className="user-name-small">{user.firstName}</span>
+              </Link>
+              <button onClick={logout} className="logout-btn-header" title="Exit Session">
+                <FontAwesomeIcon icon={faSignOutAlt} />
               </button>
-            </li>
-          </ul>
-        </nav>
+            </div>
+          ) : (
+            <Link to="/login" className="login-link-header">Authenticate</Link>
+          )}
+        </div>
       </div>
     </header>
   );

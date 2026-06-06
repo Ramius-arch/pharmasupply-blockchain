@@ -19,10 +19,19 @@ export const CartProvider = ({ children }) => {
   const addToCart = (product, quantity = 1) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
+      const currentQty = existingItem ? existingItem.quantity : 0;
+      const newQty = currentQty + quantity;
+
+      // Validate against available stock
+      if (product.quantityInStock !== undefined && newQty > product.quantityInStock) {
+        console.warn(`Cannot add more than ${product.quantityInStock} units of "${product.name}"`);
+        return prevItems; // Return unchanged cart
+      }
+
       if (existingItem) {
         return prevItems.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: newQty }
             : item
         );
       } else {
@@ -38,17 +47,24 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = (productId, newQuantity) => {
     setCartItems((prevItems) => {
       return prevItems
-        .map((item) =>
-          item.id === productId ? { ...item, quantity: newQuantity } : item
-        )
-        .filter((item) => item.quantity > 0); // Remove if quantity drops to 0 or below
+        .map((item) => {
+          if (item.id === productId) {
+            // Validate against available stock
+            if (item.quantityInStock !== undefined && newQuantity > item.quantityInStock) {
+              console.warn(`Cannot set quantity above available stock (${item.quantityInStock})`);
+              return item; // Return unchanged item
+            }
+            return { ...item, quantity: newQuantity };
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0);
     });
   };
 
   const checkout = () => {
-    // Placeholder for checkout logic
     console.log('Initiating checkout...');
-    setCartItems([]); // Clear cart after checkout
+    setCartItems([]);
   };
 
   const clearCart = () => {
@@ -58,6 +74,14 @@ export const CartProvider = ({ children }) => {
   const getItemQuantity = (productId) => {
     return cartItems.find(item => item.id === productId)?.quantity || 0;
   };
+
+  // Computed cart total
+  const cartTotal = cartItems.reduce((total, item) => {
+    return total + (item.unitPrice || 0) * item.quantity;
+  }, 0);
+
+  // Computed cart item count
+  const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
   return (
     <CartContext.Provider
@@ -69,6 +93,8 @@ export const CartProvider = ({ children }) => {
         checkout,
         clearCart,
         getItemQuantity,
+        cartTotal,
+        cartCount,
       }}
     >
       {children}

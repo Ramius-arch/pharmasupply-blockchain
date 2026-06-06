@@ -1,40 +1,44 @@
-// src/components/AdminDashboard/AdminDashboard.jsx
 import React, { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import DashboardOverview from './DashboardOverview';
 import ProductManagement from './ProductManagement';
-// import AdminOrders from './AdminOrders'; // Temporarily commented out
+import AdminOrders from './AdminOrders';
 import UserManagement from './UserManagement';
-import { AuthContext } from '../../context/AuthContext';
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const { user } = useContext(AuthContext);
 
-  // Placeholder data - replace with actual API calls
   const totalOrders = 1234;
   const revenue = 567890;
-  const users = 12345;
+  const usersCount = 12345;
 
   return (
-    <div className="admin-dashboard">
-      {/* Dashboard Header */}
+    <div className="admin-dashboard container animate-fade-in">
       <div className="dashboard-header">
-        <div className="dashboard-title">Admin Dashboard</div>
-        <div className="admin-actions">
-          {user && user.role === 'admin' ? (
-            <>
-              <button>Create Product</button>
-              <button>Add User</button>
-            </>
-          ) : null}
-        </div>
+        <h1 className="dashboard-title">Control Center</h1>
+        {user?.role === 'admin' && (
+          <div className="admin-actions hidden-mobile">
+            <button className="btn btn-primary">Create Product</button>
+            <button className="btn btn-outline">Add User</button>
+          </div>
+        )}
       </div>
 
-      {/* Dashboard Content */}
       <div className="dashboard-content">
-        <DashboardOverview totalOrders={totalOrders} revenue={revenue} users={users} />
-        <ProductManagement />
-        {/* <AdminOrders /> */}
-        <UserManagement />
+        <DashboardOverview totalOrders={totalOrders} revenue={revenue} users={usersCount} />
+
+        <div className="admin-section card">
+          <ProductManagement />
+        </div>
+
+        <div className="admin-section card">
+          <AdminOrders />
+        </div>
+
+        <div className="admin-section card">
+          <UserManagement />
+        </div>
       </div>
     </div>
   );

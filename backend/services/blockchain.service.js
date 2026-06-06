@@ -86,10 +86,18 @@ exports.createItemOnBlockchain = async (description) => {
     let newItemId;
     if (receipt.logs) {
       // Find the ItemCreated event in the transaction receipt logs to get the new item's ID.
-      const event = receipt.logs.find(log => supplyChainContract.interface.parseLog(log)?.name === "ItemCreated");
-      if (event) {
-        const parsedEvent = supplyChainContract.interface.parseLog(event);
-        newItemId = parsedEvent.args[0].toString(); // Access by index
+      for (const log of receipt.logs) {
+        try {
+          const parsedLog = supplyChainContract.interface.parseLog(log);
+          if (parsedLog && parsedLog.name === "ItemCreated") {
+            // In Ethers v6, args can be accessed by name or index
+            newItemId = parsedLog.args.itemId ? parsedLog.args.itemId.toString() : parsedLog.args[0].toString();
+            break;
+          }
+        } catch (e) {
+          // Log might not be from this contract, skip it
+          continue;
+        }
       }
     }
     

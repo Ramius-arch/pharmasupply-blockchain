@@ -12,57 +12,64 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     if (!email || !password) {
       toast.error('Please fill in all fields');
       return;
     }
-
     try {
       await login(email, password);
       navigate('/');
-      toast.success('Login successful!');
+      toast.success('Access Granted - Session Initialized');
     } catch (error) {
-      toast.error(error.message || 'Invalid credentials');
+      toast.error(error.message || 'Authentication failed');
     }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <h1>Welcome Back</h1>
-        <p>Please enter your details to sign in.</p>
-        <form onSubmit={handleLogin}>
-          <div className="input-group">
-            <label htmlFor="email">Email</label>
+    <div className="login-container container animate-fade-in">
+      <div className="login-card card">
+        <div className="login-header">
+          <h1 className="logo" style={{ fontSize: '2.5rem', marginBottom: '8px' }}>PharmaSupply</h1>
+          <p style={{ color: 'var(--text-secondary)' }}>Secure Node Authentication</p>
+        </div>
+
+        <form onSubmit={handleLogin} className="login-form">
+          <div className="input-row">
+            <label htmlFor="email">Node ID (Email)</label>
             <input
               type="email"
               id="email"
-              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="e.g. admin@pharma.net"
+              required
             />
           </div>
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
+          <div className="input-row">
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <label htmlFor="password">Security Key (Password)</label>
+              <Link to="/forgot-password" style={{ fontSize: '0.8rem', color: 'var(--primary)' }}>Recover Key?</Link>
+            </div>
             <input
               type="password"
               id="password"
-              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
             />
           </div>
-          <div className="form-footer">
-            <Link to="/forgot-password">Forgot password?</Link>
-          </div>
-          <button type="submit" className="btn" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
+
+          <button type="submit" className="btn btn-primary" style={{ width: '100%', height: '48px', marginTop: '16px' }} disabled={loading}>
+            {loading ? 'Verifying Credentials...' : 'Authenticate'}
           </button>
         </form>
-        <p className="register-link">
-          Don't have an account? <Link to="/register">Sign up</Link>
-        </p>
+
+        <div className="login-footer" style={{ textAlign: 'center', marginTop: '24px' }}>
+          <p style={{ color: 'var(--text-secondary)' }}>
+            New node cluster? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: '600' }}>Register Station</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

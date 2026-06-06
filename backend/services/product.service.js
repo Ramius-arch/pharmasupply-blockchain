@@ -3,19 +3,27 @@ const blockchainService = require('./blockchain.service');
 
 // Create a new product
 exports.createProduct = async (productData) => {
+    // Validate expiry date — reject already expired products
+    if (productData.expiryDate && new Date(productData.expiryDate) <= new Date()) {
+        throw new Error('Cannot create a product that is already expired');
+    }
+
+    // Validate manufacturing date is before expiry date
+    if (productData.manufacturingDate && productData.expiryDate) {
+        if (new Date(productData.manufacturingDate) >= new Date(productData.expiryDate)) {
+            throw new Error('Manufacturing date must be before expiry date');
+        }
+    }
+
     const product = new Product(productData);
-    
+
     // Create item on blockchain
     let blockchainItemId;
     try {
-        // Use product name as description for the blockchain item
         blockchainItemId = await blockchainService.createItemOnBlockchain(product.name);
         product.blockchainItemId = blockchainItemId;
     } catch (error) {
         console.error("Failed to create blockchain item for product:", error);
-        // Decide how to handle this: rollback DB creation, or just log and continue without blockchain ID
-        // For now, we'll log and proceed, but in a real app, strict error handling is needed.
-        // throw new Error("Product creation failed due to blockchain error.");
     }
 
     return await product.save();
@@ -34,6 +42,10 @@ exports.getProductById = async (productId) => {
 
 // Update a product by its ID
 exports.updateProduct = async (productId, updateData) => {
+    // Prevent stock from going negative
+    if (updateData.quantityInStock !== undefined && updateData.quantityInStock < 0) {
+        throw new Error('Stock quantity cannot be negative');
+    }
     return await Product.findByIdAndUpdate(productId, updateData, { new: true, runValidators: true });
 };
 

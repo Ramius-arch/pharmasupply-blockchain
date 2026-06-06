@@ -13,11 +13,12 @@ const SupplierSchema = new Schema({
     zipCode: { type: String }
   },
   licenseNumber: { type: String, unique: true },
+  licenseExpiryDate: { type: Date }, // Supplier licenses expire in real world
   status: {
     type: String,
-    default: 'pending', // pending, approved, rejected
+    default: 'pending',
     enum: ['pending', 'approved', 'rejected']
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Supplier', SupplierSchema);

@@ -35,11 +35,16 @@ function Products() {
   }
 
   return (
-    <div className="products-page">
-      <h1 className="page-title">Available Products</h1>
+    <div className="products-page container animate-fade-in">
+      <div style={{ marginBottom: '48px', textAlign: 'center' }}>
+        <h1 className="logo" style={{ fontSize: '3rem', marginBottom: '16px' }}>Pharmacy Catalog</h1>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem' }}>Verified and tracked pharmaceutical products on the blockchain.</p>
+      </div>
 
       {products.length === 0 ? (
-        <p>No products found.</p>
+        <div className="card" style={{ textAlign: 'center', padding: '80px' }}>
+          <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)' }}>No products found in the catalog.</p>
+        </div>
       ) : (
         <div className="product-grid">
           {products.map((product) => (
@@ -48,8 +53,8 @@ function Products() {
               product={{
                 id: product._id,
                 name: product.name,
-                price: product.unitPrice, // Map unitPrice to price for ProductCard
-                image: product.image, // ProductCard expects 'image'
+                price: product.unitPrice,
+                image: product.image,
               }}
             />
           ))}

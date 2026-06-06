@@ -1,60 +1,153 @@
-/* frontend/src/components/Layout/Header.css */
-.header {
-    background-color: var(--dark); /* Use dark variable from global */
-    padding: 1rem 0;
-    color: var(--medilazar-text); /* Use medilazar-text for general header text */
-    box-shadow: 0 4px 8px var(--shadow); /* Use shadow variable from global */
-    border-bottom: 1px solid var(--gray); /* Subtle industrial border */
+.app-header {
+  height: 64px;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  backdrop-filter: blur(10px);
 }
 
-.header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-left: 0; /* Remove left padding */
-    padding-right: 1rem; /* Keep right padding for navigation */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.header .logo {
-    color: var(--primary); /* Use primary variable for logo */
-    text-decoration: none;
-    font-size: 1.8rem; /* Consistent with global.css */
-    font-weight: bold;
-    text-transform: uppercase; /* Industrial feel */
-    letter-spacing: 2px; /* Consistent with global.css */
+.hamburger-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: var(--transition);
 }
 
-.header .nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 1.5rem;
+.hamburger-btn:hover {
+  background: var(--surface-hover);
 }
 
-.header .nav-item .nav-link,
-.header .nav-item .logout-btn {
-    color: var(--medilazar-text); /* Link color consistent with medilazar-text */
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 0; /* Sharp edges for grunge */
-    transition: background-color 0.3s ease, color 0.3s ease;
-    background: none;
-    border: 1px solid transparent; /* Subtle border for interaction */
-    cursor: pointer;
+.header-logo a {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: -0.5px;
 }
 
-.header .nav-item .nav-link:hover,
-.header .nav-item .logout-btn:hover {
-    background-color: var(--light); /* Lighter background on hover */
-    color: var(--medilazar-accent); /* Accent color on hover */
-    border-color: var(--medilazar-accent);
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.header .nav-item .logout-btn {
-    font-size: 1rem;
-    /* Specific styles for logout button if needed */
+.action-icon {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: var(--transition);
+}
+
+.action-icon:hover {
+  color: var(--text-primary);
+}
+
+.notification-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--danger);
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+}
+
+.user-profile-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.user-name-small {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logout-btn-header {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: var(--transition);
+}
+
+.logout-btn-header:hover {
+  color: var(--danger);
+}
+
+.login-link-header {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 1025px) {
+  .hamburger-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .desktop-only {
+    display: none;
+  }
+  
+  .app-header {
+    padding: 0 16px;
+  }
+
+  .header-actions {
+    gap: 12px;
+  }
+
+  .user-name-small {
+    display: none;
+  }
 }

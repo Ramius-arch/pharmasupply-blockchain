@@ -1,134 +1,56 @@
 chunk-R3VZBYWY.js?v=4961e7c7:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
 AuthContext.jsx:70 AuthContext: Current user: null isAuthenticated: false loading: true
 AuthContext.jsx:70 AuthContext: Current user: null isAuthenticated: false loading: true
-productService.js:25 Attempting to fetch all products...
-AuthContext.jsx:15 AuthContext: Loading user from localStorage...
-AuthContext.jsx:19 AuthContext: User loaded from localStorage: Object
-react-router-dom.js?v=4961e7c7:4413 ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
-warnOnce @ react-router-dom.js?v=4961e7c7:4413
-react-router-dom.js?v=4961e7c7:4413 ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
-warnOnce @ react-router-dom.js?v=4961e7c7:4413
-productService.js:25 Attempting to fetch all products...
-AuthContext.jsx:15 AuthContext: Loading user from localStorage...
-AuthContext.jsx:19 AuthContext: User loaded from localStorage: Object
-AuthContext.jsx:70 AuthContext: Current user: Object isAuthenticated: true loading: false
-AuthContext.jsx:70 AuthContext: Current user: Object isAuthenticated: true loading: false
-blockchainService.js:9  POST http://localhost:5173/api/blockchain/item 500 (Internal Server Error)
-dispatchXhrRequest @ axios.js?v=4961e7c7:1696
-xhr @ axios.js?v=4961e7c7:1573
-dispatchRequest @ axios.js?v=4961e7c7:2107
-_request @ axios.js?v=4961e7c7:2327
-request @ axios.js?v=4961e7c7:2219
-httpMethod @ axios.js?v=4961e7c7:2356
-wrap @ axios.js?v=4961e7c7:8
-createBlockchainItem @ blockchainService.js:9
-handleFormSubmit @ ProductManagement.jsx:53
-callCallback2 @ chunk-R3VZBYWY.js?v=4961e7c7:3674
-invokeGuardedCallbackDev @ chunk-R3VZBYWY.js?v=4961e7c7:3699
-invokeGuardedCallback @ chunk-R3VZBYWY.js?v=4961e7c7:3733
-invokeGuardedCallbackAndCatchFirstError @ chunk-R3VZBYWY.js?v=4961e7c7:3736
-executeDispatch @ chunk-R3VZBYWY.js?v=4961e7c7:7014
-processDispatchQueueItemsInOrder @ chunk-R3VZBYWY.js?v=4961e7c7:7034
-processDispatchQueue @ chunk-R3VZBYWY.js?v=4961e7c7:7043
-dispatchEventsForPlugins @ chunk-R3VZBYWY.js?v=4961e7c7:7051
-(anonymous) @ chunk-R3VZBYWY.js?v=4961e7c7:7174
-batchedUpdates$1 @ chunk-R3VZBYWY.js?v=4961e7c7:18913
-batchedUpdates @ chunk-R3VZBYWY.js?v=4961e7c7:3579
-dispatchEventForPluginEventSystem @ chunk-R3VZBYWY.js?v=4961e7c7:7173
-dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-R3VZBYWY.js?v=4961e7c7:5478
-dispatchEvent @ chunk-R3VZBYWY.js?v=4961e7c7:5472
-dispatchDiscreteEvent @ chunk-R3VZBYWY.js?v=4961e7c7:5449
-blockchainService.js:16 Error creating blockchain item: AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
-createBlockchainItem @ blockchainService.js:16
-await in createBlockchainItem
-handleFormSubmit @ ProductManagement.jsx:53
-callCallback2 @ chunk-R3VZBYWY.js?v=4961e7c7:3674
-invokeGuardedCallbackDev @ chunk-R3VZBYWY.js?v=4961e7c7:3699
-invokeGuardedCallback @ chunk-R3VZBYWY.js?v=4961e7c7:3733
-invokeGuardedCallbackAndCatchFirstError @ chunk-R3VZBYWY.js?v=4961e7c7:3736
-executeDispatch @ chunk-R3VZBYWY.js?v=4961e7c7:7014
-processDispatchQueueItemsInOrder @ chunk-R3VZBYWY.js?v=4961e7c7:7034
-processDispatchQueue @ chunk-R3VZBYWY.js?v=4961e7c7:7043
-dispatchEventsForPlugins @ chunk-R3VZBYWY.js?v=4961e7c7:7051
-(anonymous) @ chunk-R3VZBYWY.js?v=4961e7c7:7174
-batchedUpdates$1 @ chunk-R3VZBYWY.js?v=4961e7c7:18913
-batchedUpdates @ chunk-R3VZBYWY.js?v=4961e7c7:3579
-dispatchEventForPluginEventSystem @ chunk-R3VZBYWY.js?v=4961e7c7:7173
-dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-R3VZBYWY.js?v=4961e7c7:5478
-dispatchEvent @ chunk-R3VZBYWY.js?v=4961e7c7:5472
-dispatchDiscreteEvent @ chunk-R3VZBYWY.js?v=4961e7c7:5449
-ProductManagement.jsx:75 AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
-handleFormSubmit @ ProductManagement.jsx:75
-await in handleFormSubmit
-callCallback2 @ chunk-R3VZBYWY.js?v=4961e7c7:3674
-invokeGuardedCallbackDev @ chunk-R3VZBYWY.js?v=4961e7c7:3699
-invokeGuardedCallback @ chunk-R3VZBYWY.js?v=4961e7c7:3733
-invokeGuardedCallbackAndCatchFirstError @ chunk-R3VZBYWY.js?v=4961e7c7:3736
-executeDispatch @ chunk-R3VZBYWY.js?v=4961e7c7:7014
-processDispatchQueueItemsInOrder @ chunk-R3VZBYWY.js?v=4961e7c7:7034
-processDispatchQueue @ chunk-R3VZBYWY.js?v=4961e7c7:7043
-dispatchEventsForPlugins @ chunk-R3VZBYWY.js?v=4961e7c7:7051
-(anonymous) @ chunk-R3VZBYWY.js?v=4961e7c7:7174
-batchedUpdates$1 @ chunk-R3VZBYWY.js?v=4961e7c7:18913
-batchedUpdates @ chunk-R3VZBYWY.js?v=4961e7c7:3579
-dispatchEventForPluginEventSystem @ chunk-R3VZBYWY.js?v=4961e7c7:7173
-dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-R3VZBYWY.js?v=4961e7c7:5478
-dispatchEvent @ chunk-R3VZBYWY.js?v=4961e7c7:5472
-dispatchDiscreteEvent @ chunk-R3VZBYWY.js?v=4961e7c7:5449
+AdminDashboard.jsx:2 Uncaught ReferenceError: useContext is not defined
+    at AdminDashboard (AdminDashboard.jsx:2:20)
+    at renderWithHooks (chunk-R3VZBYWY.js?v=4961e7c7:11548:26)
+    at mountIndeterminateComponent (chunk-R3VZBYWY.js?v=4961e7c7:14926:21)
+    at beginWork (chunk-R3VZBYWY.js?v=4961e7c7:15914:22)
+    at HTMLUnknownElement.callCallback2 (chunk-R3VZBYWY.js?v=4961e7c7:3674:22)
+    at Object.invokeGuardedCallbackDev (chunk-R3VZBYWY.js?v=4961e7c7:3699:24)
+    at invokeGuardedCallback (chunk-R3VZBYWY.js?v=4961e7c7:3733:39)
+    at beginWork$1 (chunk-R3VZBYWY.js?v=4961e7c7:19765:15)
+    at performUnitOfWork (chunk-R3VZBYWY.js?v=4961e7c7:19198:20)
+    at workLoopSync (chunk-R3VZBYWY.js?v=4961e7c7:19137:13)
+AuthContext.jsx:70 AuthContext: Current user: null isAuthenticated: false loading: true
+AuthContext.jsx:70 AuthContext: Current user: null isAuthenticated: false loading: true
+AdminDashboard.jsx:2 Uncaught ReferenceError: useContext is not defined
+    at AdminDashboard (AdminDashboard.jsx:2:20)
+    at renderWithHooks (chunk-R3VZBYWY.js?v=4961e7c7:11548:26)
+    at mountIndeterminateComponent (chunk-R3VZBYWY.js?v=4961e7c7:14926:21)
+    at beginWork (chunk-R3VZBYWY.js?v=4961e7c7:15914:22)
+    at HTMLUnknownElement.callCallback2 (chunk-R3VZBYWY.js?v=4961e7c7:3674:22)
+    at Object.invokeGuardedCallbackDev (chunk-R3VZBYWY.js?v=4961e7c7:3699:24)
+    at invokeGuardedCallback (chunk-R3VZBYWY.js?v=4961e7c7:3733:39)
+    at beginWork$1 (chunk-R3VZBYWY.js?v=4961e7c7:19765:15)
+    at performUnitOfWork (chunk-R3VZBYWY.js?v=4961e7c7:19198:20)
+    at workLoopSync (chunk-R3VZBYWY.js?v=4961e7c7:19137:13)
+chunk-R3VZBYWY.js?v=4961e7c7:14032 The above error occurred in the <AdminDashboard> component:
 
-C:\Users\ADMIN\Documents\GitHub\pharmasupply-blockchain (main)        
-λ npm run dev                                                         
-                                                                      
-> pharmasupply-blockchain@1.0.0 dev                                   
-> concurrently "npm:backend" "npm:frontend"                           
-                                                                      
-(node:25324) [DEP0060] DeprecationWarning: The `util._extend` API is d
-eprecated. Please use Object.assign() instead.                        
-(Use `node --trace-deprecation ...` to show where the warning was crea
-ted)                                                                  
-[frontend]                                                            
-[frontend] > pharmasupply-blockchain@1.0.0 frontend                   
-[frontend] > npm run dev --workspace=frontend                         
-[frontend]                                                            
-[backend]                                                             
-[backend] > pharmasupply-blockchain@1.0.0 backend                     
-[backend] > npm start --workspace=backend                             
-[backend]                                                             
-[frontend]                                                            
-[frontend] > frontend@0.0.0 dev                                       
-[frontend] > vite                                                     
-[frontend]                                                            
-[backend]                                                             
-[backend] > backend@1.0.0 start                                       
-[backend] > node server.js                                            
-[backend]                                                             
-[frontend]                                                            
-[frontend]   VITE v5.4.21  ready in 451 ms                            
-[frontend]                                                            
-[frontend]   ➜  Local:   http://localhost:5173/                       
-[frontend]   ➜  Network: use --host to expose                         
-[backend] [dotenv@17.2.3] injecting env (5) from .env -- tip: ⚙️  supp
-ress all logs with { quiet: true }                                    
-[backend] [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  spec
-ify custom .env file path with { path: '/custom/path/.env' }          
-[backend] Server is running on http://localhost:3000                  
-[backend] Connected to MongoDB successfully!                          
-[backend] {"level":40,"time":1768239004965,"pid":36000,"hostname":"OLD
-ING","msg":"A new wallet private key was generated and exposed via API
- for demonstration purposes."}                                        
-[backend] Error creating item on blockchain: TypeError: Cannot read pr
-operties of undefined (reading 'toString')                            
-[backend]     at exports.createItemOnBlockchain (C:\Users\ADMIN\Docume
-nts\GitHub\pharmasupply-blockchain\backend\services\blockchain.service
-.js:92:45)                                                            
-[backend]     at process.processTicksAndRejections (node:internal/proc
-ess/task_queues:105:5)                                                
-[backend]     at async C:\Users\ADMIN\Documents\GitHub\pharmasupply-bl
-ockchain\backend\controllers\blockchain.controller.js:10:23           
-[backend] Error: Failed to create item on blockchain.                 
-[backend]     at exports.createItemOnBlockchain (C:\Users\ADMIN\Docume
-nts\GitHub\pharmasupply-blockchain\backend\services\blockchain.service
-.js:104:11)                                                           
-[backend]     at process.processTicksAndRejections (node:internal/proc
-ess/task_queues:105:5)                                                
-[backend]     at async C:\Users\ADMIN\Documents\GitHub\pharmasupply-bl
+    at AdminDashboard (http://localhost:5173/src/components/AdminDashboard/AdminDashboard.jsx:20:20)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=4961e7c7:4108:5)
+    at Routes (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=4961e7c7:4578:5)
+    at main
+    at div
+    at div
+    at CartProvider (http://localhost:5173/src/context/CartContext.jsx:20:32)
+    at AuthProvider (http://localhost:5173/src/context/AuthContext.jsx:21:25)
+    at Router (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=4961e7c7:4521:15)
+    at BrowserRouter (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=4961e7c7:5267:5)
+    at App
+    at ThemeProvider (http://localhost:5173/src/context/ThemeContext.jsx:20:33)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+logCapturedError @ chunk-R3VZBYWY.js?v=4961e7c7:14032
+chunk-R3VZBYWY.js?v=4961e7c7:19413 Uncaught ReferenceError: useContext is not defined
+    at AdminDashboard (AdminDashboard.jsx:2:20)
+    at renderWithHooks (chunk-R3VZBYWY.js?v=4961e7c7:11548:26)
+    at mountIndeterminateComponent (chunk-R3VZBYWY.js?v=4961e7c7:14926:21)
+    at beginWork (chunk-R3VZBYWY.js?v=4961e7c7:15914:22)
+    at beginWork$1 (chunk-R3VZBYWY.js?v=4961e7c7:19753:22)
+    at performUnitOfWork (chunk-R3VZBYWY.js?v=4961e7c7:19198:20)
+    at workLoopSync (chunk-R3VZBYWY.js?v=4961e7c7:19137:13)
+    at renderRootSync (chunk-R3VZBYWY.js?v=4961e7c7:19116:15)
+    at recoverFromConcurrentError (chunk-R3VZBYWY.js?v=4961e7c7:18736:28)
+    at performConcurrentWorkOnRoot (chunk-R3VZBYWY.js?v=4961e7c7:18684:30)

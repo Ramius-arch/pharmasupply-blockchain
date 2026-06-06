@@ -25,11 +25,11 @@ const Register = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.firstName) newErrors.firstName = 'First name is required';
-    if (!formData.lastName) newErrors.lastName = 'Last name is required';
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!formData.firstName) newErrors.firstName = 'First name required';
+    if (!formData.lastName) newErrors.lastName = 'Last name required';
+    if (!formData.email) newErrors.email = 'Valid email required';
+    if (formData.password.length < 6) newErrors.password = 'Min 6 characters';
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Keys do not match';
     return newErrors;
   };
 
@@ -44,12 +44,12 @@ const Register = () => {
     setLoading(true);
     try {
       await register({
-        firstName: formData.firstName, // Send firstName
-        lastName: formData.lastName,   // Send lastName
+        firstName: formData.firstName,
+        lastName: formData.lastName,
         email: formData.email,
         password: formData.password,
       });
-      toast.success('Registration successful!');
+      toast.success('Node Registration Successful');
       navigate('/login');
     } catch (error) {
       toast.error(error.message || 'Registration failed');
@@ -59,72 +59,55 @@ const Register = () => {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        <h1>Create an Account</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-            />
-            {errors.firstName && <p className="error-message">{errors.firstName}</p>}
+    <div className="register-container container animate-fade-in">
+      <div className="register-card card">
+        <div className="register-header" style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <h1 className="logo" style={{ fontSize: '2.5rem', marginBottom: '8px' }}>Join Network</h1>
+          <p style={{ color: 'var(--text-secondary)' }}>Register new station on the blockchain</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="register-form">
+          <div className="grid-2">
+            <div className="input-row">
+              <label>First Name</label>
+              <input name="firstName" value={formData.firstName} onChange={handleChange} placeholder="John" />
+              {errors.firstName && <p className="error-text">{errors.firstName}</p>}
+            </div>
+            <div className="input-row">
+              <label>Last Name</label>
+              <input name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" />
+              {errors.lastName && <p className="error-text">{errors.lastName}</p>}
+            </div>
           </div>
-          <div className="input-group">
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-            />
-            {errors.lastName && <p className="error-message">{errors.lastName}</p>}
+
+          <div className="input-row">
+            <label>Communication ID (Email)</label>
+            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="node@pharma.net" />
+            {errors.email && <p className="error-text">{errors.email}</p>}
           </div>
-          <div className="input-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            {errors.email && <p className="error-message">{errors.email}</p>}
+
+          <div className="input-row">
+            <label>Security Key (Password)</label>
+            <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="••••••••" />
+            {errors.password && <p className="error-text">{errors.password}</p>}
           </div>
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            {errors.password && <p className="error-message">{errors.password}</p>}
+
+          <div className="input-row">
+            <label>Confirm Security Key</label>
+            <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="••••••••" />
+            {errors.confirmPassword && <p className="error-text">{errors.confirmPassword}</p>}
           </div>
-          <div className="input-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
-            {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
-          </div>
-          <button type="submit" className="btn" disabled={loading}>
-            {loading ? 'Registering...' : 'Register'}
+
+          <button type="submit" className="btn btn-primary" style={{ width: '100%', height: '48px', marginTop: '24px' }} disabled={loading}>
+            {loading ? 'Processing Node ID...' : 'Initialize Station'}
           </button>
         </form>
-        <p className="login-link">
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
+
+        <div className="register-footer" style={{ textAlign: 'center', marginTop: '24px' }}>
+          <p style={{ color: 'var(--text-secondary)' }}>
+            Already have a node? <Link to="/login" style={{ color: 'var(--primary)', fontWeight: '600' }}>Authenticate</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -2,11 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../../context/AuthContext';
 import { toast } from 'react-toastify';
-import './AdminDashboard.css'; // Corrected CSS file for this component
+import { useNavigate } from 'react-router-dom';
+import './AdminDashboard.css';
 
 const AdminOrders = () => {
     const { user } = useContext(AuthContext);
     const token = user?.token;
+    const navigate = useNavigate();
 
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -75,54 +77,64 @@ const AdminOrders = () => {
     }
 
     return (
-        <div className="order-management-container">
-            <h3>Order Management</h3>
-            <div className="table-container">
-                <table>
+        <div className="order-management">
+            <div className="admin-header">
+                <h2>Shipment & Order Management</h2>
+            </div>
+
+            <div className="admin-table-container">
+                <table className="admin-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Customer</th>
-                            <th>Total Amount</th>
-                            <th>Status</th>
-                            <th>Items</th>
-                            <th>Actions</th>
+                            <th>Shipment ID</th>
+                            <th>Destination / Customer</th>
+                            <th>Value</th>
+                            <th>Current Status</th>
+                            <th>Manifest</th>
+                            <th style={{ textAlign: 'right' }}>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {orders.map((order) => (
                             <tr key={order._id}>
-                                <td>{order._id}</td>
-                                <td>{order.user.firstName} {order.user.lastName}</td>
+                                <td style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>{order._id.slice(-8).toUpperCase()}</td>
+                                <td style={{ fontWeight: '500' }}>
+                                    {order.user.firstName} {order.user.lastName}
+                                </td>
                                 <td>${order.totalAmount.toFixed(2)}</td>
                                 <td>
                                     <select
                                         value={order.status}
                                         onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                                        className={`status-dropdown ${order.status.toLowerCase()}`}
+                                        className="btn btn-outline"
+                                        style={{
+                                            padding: '4px 8px',
+                                            fontSize: '0.8rem',
+                                            background: 'rgba(255,255,255,0.05)',
+                                            border: '1px solid var(--border)',
+                                            color: 'var(--text-primary)'
+                                        }}
                                     >
-                                        <option value="pending">Pending</option>
+                                        <option value="pending">Pending Review</option>
                                         <option value="processing">Processing</option>
-                                        <option value="shipped">Shipped</option>
+                                        <option value="shipped">In Transit</option>
                                         <option value="delivered">Delivered</option>
                                         <option value="cancelled">Cancelled</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <ul>
-                                        {order.items.map((item) => (
-                                            <li key={item.product._id}>
-                                                {item.product.name} ({item.quantity} units)
-                                                {item.product.blockchainItemId && (
-                                                    <span className="blockchain-id"> (Blockchain ID: {item.product.blockchainItemId})</span>
-                                                )}
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                                        {order.items.length} units ({order.items[0]?.product?.name.slice(0, 15)}...)
+                                    </div>
                                 </td>
-                                <td>
-                                    {/* Additional actions like View Details, etc. */}
-                                    <button className="view-details-btn">View</button>
+                                <td style={{ textAlign: 'right' }}>
+                                    <button 
+                                        className="btn btn-outline" 
+                                        style={{ padding: '4px 12px', fontSize: '0.8rem' }}
+                                        onClick={() => navigate('/blockchain-transaction')}
+                                    >
+                                        View Log
+                                    </button>
                                 </td>
                             </tr>
                         ))}

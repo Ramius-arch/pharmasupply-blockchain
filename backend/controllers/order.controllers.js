@@ -2,7 +2,17 @@ const orderService = require('../services/order.service');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/apiError');
 
-exports.createOrder = catchAsync(async (req, res) => {
+exports.createOrder = catchAsync(async (req, res, next) => {
+    const { items, supplier, shippingAddress } = req.body;
+
+    // Validate required fields
+    if (!items || items.length === 0) {
+        return next(new AppError('Order must contain at least one item', 400));
+    }
+    if (!supplier) {
+        return next(new AppError('Supplier is required', 400));
+    }
+
     // Add the authenticated user's ID to the order
     req.body.user = req.user.id;
     const order = await orderService.createOrder(req.body);

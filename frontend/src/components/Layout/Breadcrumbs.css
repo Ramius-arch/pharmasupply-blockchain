@@ -1,19 +1,26 @@
-/* frontend/src/components/Layout/Breadcrumbs.css */
 .breadcrumbs {
-  padding: 1rem 0;
+  padding: 16px 40px;
+  background: rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid var(--border);
-  margin-bottom: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .breadcrumbs a {
   color: var(--primary);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .breadcrumbs a:hover {
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
 .breadcrumbs span {
-  color: var(--text-secondary);
+  color: var(--text-primary);
+  font-weight: 500;
 }

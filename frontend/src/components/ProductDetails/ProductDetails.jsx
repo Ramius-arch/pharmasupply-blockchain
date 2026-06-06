@@ -7,8 +7,8 @@ import blockchainService from '../../api/blockchainService'; // Import the block
 import { AuthContext } from '../../context/AuthContext'; // Import AuthContext
 
 const ProductDetails = () => {
-  const { id } = useParams(); // Changed from productId to id
-  const { user } = useContext(AuthContext); // Get user from AuthContext
+  const { id } = useParams();
+  const { user } = useContext(AuthContext);
   const token = user?.token;
 
   const [product, setProduct] = useState(null);
@@ -17,7 +17,6 @@ const ProductDetails = () => {
   const [blockchainItem, setBlockchainItem] = useState(null);
   const [blockchainHistory, setBlockchainHistory] = useState(null);
 
-  // State for review form
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
@@ -26,9 +25,8 @@ const ProductDetails = () => {
       try {
         setLoading(true);
         const productData = await productService.getProductById(id);
-        setProduct(productData.data); // Assuming the API returns { data: product }
+        setProduct(productData.data);
 
-        // If product has a blockchainItemId, fetch blockchain data
         if (productData.data.blockchainItemId && token) {
           const blockchainDetails = await blockchainService.getBlockchainItemDetails(productData.data.blockchainItemId, token);
           setBlockchainItem(blockchainDetails.data);
@@ -37,7 +35,7 @@ const ProductDetails = () => {
           setBlockchainHistory(blockchainHist.data);
         }
       } catch (err) {
-        setError('Failed to fetch product details or blockchain data.');
+        setError('Failed to fetch product details.');
         console.error(err);
       } finally {
         setLoading(false);
@@ -45,113 +43,105 @@ const ProductDetails = () => {
     };
 
     fetchProductDetails();
-  }, [id, token]); // Re-fetch if ID or token changes
+  }, [id, token]);
 
-  if (loading) {
-    return <div className="loading">Loading product details...</div>;
-  }
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
-
-  if (!product) {
-    return <div className="no-data">Product not found.</div>;
-  }
-
-  const handleReviewSubmit = (e) => {
-    e.preventDefault();
-    if (!comment || rating === 0) {
-        alert('Please provide a rating and a comment.');
-        return;
-    }
-    // Process form submission and add review to product
-    alert(`Review Submitted! Rating: ${rating}, Comment: ${comment}`);
-    // Here you would typically send this data to your backend
-    setRating(0);
-    setComment('');
-  };
+  if (loading) return <div className="container" style={{ padding: '80px', textAlign: 'center' }}>Loading...</div>;
+  if (error || !product) return <div className="container" style={{ padding: '80px', textAlign: 'center', color: 'var(--danger)' }}>{error || 'Product not found'}</div>;
 
   return (
-    <div className="product-details-container">
-      <div className="product-details">
-        {/* Product Image */}
-        <img src={product.image || placeholderImg} alt={product.name} className="detail-image" /> {/* Using placeholder for now */}
-
-        {/* Product Information */}
-        <div className="product-info">
-          <h1>{product.name}</h1>
-          <p className="price">Price: ${product.unitPrice ? product.unitPrice.toFixed(2) : 'N/A'}</p>
-          <p>Category: {product.category}</p>
-          <p>Manufacturer: {product.manufacturer}</p>
-          <p>Quantity in Stock: {product.quantityInStock}</p>
-          <p>Dosage Form: {product.dosageForm}</p>
-          <p>Strength: {product.strength}</p>
-          <p>Pharmaceutical Code: {product.pharmaceuticalCode}</p>
-
-          {/* Product Description */}
-          <div className="description">
-            <h2>Description</h2>
-            <p>{product.description}</p>
-          </div>
-          
-          {/* Blockchain Information */}
+    <div className="product-details-container container animate-fade-in">
+      <div className="product-layout">
+        {/* Left: Product Image */}
+        <div className="product-media">
+          <img src={product.image || 'https://picsum.photos/seed/' + id + '/800/600?grayscale'} alt={product.name} className="main-image" />
           {blockchainItem && (
-            <div className="blockchain-info">
-              <h2>Blockchain Tracking</h2>
-              <p>Blockchain Item ID: {blockchainItem.id}</p>
-              <p>Current Status: {blockchainItem.status}</p>
-              <p>Last Updated (Blockchain): {blockchainItem.lastUpdated?.toLocaleString()}</p>
-
-              {blockchainHistory && blockchainHistory.length > 0 && (
-                <div className="blockchain-history">
-                  <h3>Status History</h3>
-                  <ul>
-                    {blockchainHistory.map((entry, index) => (
-                      <li key={index}>
-                        {entry.status} at {entry.timestamp?.toLocaleString()} by {entry.updater}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+            <div className="blockchain-badge">
+              <span className="pulse"></span>
+              Blockchain Verified: {blockchainItem.id}
             </div>
           )}
+        </div>
 
-          {/* Reviews Section */}
-          <div className="reviews-section">
-            <h2>Customer Reviews</h2>
-            {/* Display existing reviews here */}
-            {/* For now, a simple message */}
-            <p>No reviews yet. Be the first to review!</p> 
-
-            <h3>Write a Review</h3>
-            <form onSubmit={handleReviewSubmit}>
-              <div className="review-input-group">
-                <label htmlFor="rating">Rating:</label>
-                <select id="rating" value={rating} onChange={(e) => setRating(Number(e.target.value))} required>
-                  <option value="0">Select a rating</option>
-                  <option value="1">1 Star</option>
-                  <option value="2">2 Stars</option>
-                  <option value="3">3 Stars</option>
-                  <option value="4">4 Stars</option>
-                  <option value="5">5 Stars</option>
-                </select>
-              </div>
-              <div className="review-input-group">
-                <label htmlFor="comment">Comment:</label>
-                <textarea
-                  id="comment"
-                  rows="4"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder="Share your thoughts about this product..."
-                  required
-                ></textarea>
-              </div>
-              <button type="submit">Submit Review</button>
-            </form>
+        {/* Right: Product Info */}
+        <div className="product-core-info">
+          <div className="product-header">
+            <span className="category-tag">{product.category}</span>
+            <h1>{product.name}</h1>
+            <p className="price-tag">${product.unitPrice?.toFixed(2)}</p>
           </div>
+
+          <div className="product-specs card">
+            <div className="spec-item"><span>Manufacturer</span> <strong>{product.manufacturer}</strong></div>
+            <div className="spec-item"><span>Dosage Form</span> <strong>{product.dosageForm}</strong></div>
+            <div className="spec-item"><span>Strength</span> <strong>{product.strength}</strong></div>
+            <div className="spec-item"><span>In Stock</span> <strong>{product.quantityInStock} units</strong></div>
+          </div>
+
+          <div className="product-description">
+            <h3>Description</h3>
+            <p>{product.description}</p>
+          </div>
+
+          <button className="btn btn-primary" style={{ width: '100%', height: '56px', fontSize: '1.1rem' }}>
+            Add to Shipment Cart
+          </button>
+        </div>
+      </div>
+
+      <div className="details-grid">
+        {/* Blockchain Traceability */}
+        {blockchainItem && (
+          <div className="blockchain-traceability card">
+            <h2>Blockchain Traceability</h2>
+            <div className="status-banner">
+              <div className="status-label">Current Node Status</div>
+              <div className="status-value">{blockchainItem.status}</div>
+            </div>
+
+            {blockchainHistory && (
+              <div className="timeline">
+                <h3>Transaction History</h3>
+                {blockchainHistory.map((entry, index) => (
+                  <div key={index} className="timeline-item">
+                    <div className="timeline-marker"></div>
+                    <div className="timeline-content">
+                      <div className="timeline-status">{entry.status}</div>
+                      <div className="timeline-meta">
+                        <span>{new Date(entry.timestamp).toLocaleString()}</span>
+                        <span className="address">By: {entry.updater.slice(0, 6)}...{entry.updater.slice(-4)}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Reviews */}
+        <div className="product-reviews card">
+          <h2>Verified Reviews</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>No reviews yet for this batch.</p>
+
+          <form className="review-form">
+            <h3>Share Feedback</h3>
+            <div className="input-row">
+              <label>Rating</label>
+              <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
+                <option value="0">Select Rating</option>
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Good</option>
+                <option value="3">3 - Average</option>
+                <option value="2">2 - Fair</option>
+                <option value="1">1 - Poor</option>
+              </select>
+            </div>
+            <div className="input-row">
+              <label>Comment</label>
+              <textarea rows="3" value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Batch feedback..."></textarea>
+            </div>
+            <button className="btn btn-outline" style={{ width: '100%' }}>Submit Feedback</button>
+          </form>
         </div>
       </div>
     </div>

@@ -1,21 +1,53 @@
-/* frontend/src/App.css */
-
 .app-container {
   display: flex;
+  min-height: 100vh;
+  background-color: var(--background);
+  overflow-x: hidden;
 }
 
 .main-content {
   flex-grow: 1;
-  padding: 2rem;
-  margin-left: 250px; /* Same as sidebar width */
+  margin-left: 280px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, margin 0.3s ease;
 }
 
-@media (max-width: 768px) {
+.content-wrap {
+  flex-grow: 1;
+  padding: 40px;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 95;
+  animation: fadeIn 0.2s ease;
+}
+
+@media (max-width: 1024px) {
   .main-content {
     margin-left: 0;
+    width: 100%;
   }
 
-  .sidebar {
+  .content-wrap {
+    padding: 24px 16px;
+  }
+
+  .desktop-breadcrumb-wrap {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-wrap {
+    padding: 16px 12px;
   }
 }
