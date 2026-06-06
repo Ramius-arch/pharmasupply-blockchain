@@ -14,8 +14,11 @@ const Header = ({ onToggleSidebar }) => {
         <button className="hamburger-btn" onClick={onToggleSidebar}>
           <FontAwesomeIcon icon={faBars} />
         </button>
-        <div className="header-logo desktop-only">
-          <Link to="/">PharmaNet Ledger</Link>
+        <div className="header-logo">
+          <Link to="/">
+            <span className="logo-full">PharmaNet Ledger</span>
+            <span className="logo-short">PharmaNet</span>
+          </Link>
         </div>
       </div>
 

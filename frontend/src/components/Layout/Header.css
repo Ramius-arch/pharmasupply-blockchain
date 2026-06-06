@@ -37,111 +37,39 @@
 }
 
 .header-logo a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo-full {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-primary);
-  text-decoration: none;
   letter-spacing: -0.5px;
 }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.action-icon {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
+.logo-short {
+  display: none;
   font-size: 1.1rem;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-  transition: var(--transition);
-}
-
-.action-icon:hover {
+  font-weight: 700;
   color: var(--text-primary);
-}
-
-.notification-dot {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 8px;
-  height: 8px;
-  background-color: var(--danger);
-  border-radius: 50%;
-  border: 2px solid var(--surface);
-}
-
-.user-profile-menu {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-left: 12px;
-  border-left: 1px solid var(--border);
-}
-
-.profile-trigger {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-primary);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.user-name-small {
-  max-width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.logout-btn-header {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-  transition: var(--transition);
-}
-
-.logout-btn-header:hover {
-  color: var(--danger);
-}
-
-.login-link-header {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-@media (min-width: 1025px) {
-  .hamburger-btn {
-    display: none;
-  }
+  letter-spacing: -0.5px;
 }
 
 @media (max-width: 1024px) {
-  .desktop-only {
+  .logo-full {
     display: none;
+  }
+  
+  .logo-short {
+    display: block;
   }
   
   .app-header {
     padding: 0 16px;
   }
+...
 
   .header-actions {
     gap: 12px;
