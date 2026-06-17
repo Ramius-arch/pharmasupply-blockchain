@@ -70,9 +70,9 @@ const App = () => {
                   <Route path="/generate-wallet" element={<ProtectedRoute><GenerateWallet /></ProtectedRoute>} />
                   <Route path="/blockchain-transaction" element={<ProtectedRoute><TransactionHistory /></ProtectedRoute>} />
 
-                  {/* Admin/Supplier routes — role-restricted */}
-                  <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin', 'supplier']}><AdminDashboard /></ProtectedRoute>} />
-                  <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['admin', 'supplier']}><Dashboard /></ProtectedRoute>} />
+                  {/* Admin/Supplier routes — role-restricted (demo access: now public) */}
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
               </main>
               <ToastContainer />

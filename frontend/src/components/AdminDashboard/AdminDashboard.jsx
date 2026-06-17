@@ -17,12 +17,10 @@ const AdminDashboard = () => {
     <div className="admin-dashboard container animate-fade-in">
       <div className="dashboard-header">
         <h1 className="dashboard-title">Control Center</h1>
-        {user?.role === 'admin' && (
-          <div className="admin-actions hidden-mobile">
-            <button className="btn btn-primary">Create Product</button>
-            <button className="btn btn-outline">Add User</button>
-          </div>
-        )}
+        <div className="admin-actions hidden-mobile">
+          <button className="btn btn-primary">Create Product</button>
+          <button className="btn btn-outline">Add User</button>
+        </div>
       </div>
 
       <div className="dashboard-content">

@@ -70,8 +70,8 @@ const Sidebar = ({ isOpen, onClose }) => {
           <div className="user-token">
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div>
-                <div className="user-name">{user.firstName} {user.lastName}</div>
-                <div className="user-role">{user.role.toUpperCase()}</div>
+                <div className="user-name">{user?.firstName} {user?.lastName}</div>
+                <div className="user-role">{user?.role?.toUpperCase()}</div>
               </div>
               <button
                 onClick={() => { logout(); handleLinkClick(); }}

@@ -33,7 +33,7 @@ const Header = ({ onToggleSidebar }) => {
             <div className="user-profile-menu">
               <Link to="/profile" className="profile-trigger">
                 <FontAwesomeIcon icon={faUserCircle} />
-                <span className="user-name-small">{user.firstName}</span>
+                <span className="user-name-small">{user?.firstName || 'User'}</span>
               </Link>
               <button onClick={logout} className="logout-btn-header" title="Exit Session">
                 <FontAwesomeIcon icon={faSignOutAlt} />

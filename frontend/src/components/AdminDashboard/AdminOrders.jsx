@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
@@ -15,21 +15,12 @@ const AdminOrders = () => {
     const [error, setError] = useState(null);
 
     const fetchAllOrders = async () => {
-        if (!token) {
-            setError('Authentication token not found.');
-            setLoading(false);
-            return;
-        }
         try {
             setLoading(true);
-            const response = await axios.get('/api/orders', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await axios.get('/api/orders');
             setOrders(response.data.data);
         } catch (err) {
-            setError('Failed to fetch orders. Make sure you have admin privileges and the backend is running.');
+            setError('Failed to fetch orders. Make sure the backend is running.');
             console.error('Error fetching all orders:', err);
             toast.error('Failed to fetch orders.');
         } finally {
@@ -37,25 +28,9 @@ const AdminOrders = () => {
         }
     };
 
-    useEffect(() => {
-        fetchAllOrders();
-    }, [token]);
-
     const handleStatusChange = async (orderId, newStatus) => {
-        if (!token) {
-            toast.error('Authentication token not found.');
-            return;
-        }
         try {
-            await axios.put(
-                `/api/orders/${orderId}/status`,
-                { status: newStatus },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            await axios.put(`/api/orders/${orderId}/status`, { status: newStatus });
             toast.success(`Order ${orderId} status updated to ${newStatus}`);
             fetchAllOrders(); // Refresh orders list
         } catch (err) {

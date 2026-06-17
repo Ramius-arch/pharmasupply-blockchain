@@ -1,56 +1,48 @@
-chunk-R3VZBYWY.js?v=4961e7c7:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
-AuthContext.jsx:70 AuthContext: Current user: null isAuthenticated: false loading: true
-AuthContext.jsx:70 AuthContext: Current user: null isAuthenticated: false loading: true
-AdminDashboard.jsx:2 Uncaught ReferenceError: useContext is not defined
-    at AdminDashboard (AdminDashboard.jsx:2:20)
-    at renderWithHooks (chunk-R3VZBYWY.js?v=4961e7c7:11548:26)
-    at mountIndeterminateComponent (chunk-R3VZBYWY.js?v=4961e7c7:14926:21)
-    at beginWork (chunk-R3VZBYWY.js?v=4961e7c7:15914:22)
-    at HTMLUnknownElement.callCallback2 (chunk-R3VZBYWY.js?v=4961e7c7:3674:22)
-    at Object.invokeGuardedCallbackDev (chunk-R3VZBYWY.js?v=4961e7c7:3699:24)
-    at invokeGuardedCallback (chunk-R3VZBYWY.js?v=4961e7c7:3733:39)
-    at beginWork$1 (chunk-R3VZBYWY.js?v=4961e7c7:19765:15)
-    at performUnitOfWork (chunk-R3VZBYWY.js?v=4961e7c7:19198:20)
-    at workLoopSync (chunk-R3VZBYWY.js?v=4961e7c7:19137:13)
-AuthContext.jsx:70 AuthContext: Current user: null isAuthenticated: false loading: true
-AuthContext.jsx:70 AuthContext: Current user: null isAuthenticated: false loading: true
-AdminDashboard.jsx:2 Uncaught ReferenceError: useContext is not defined
-    at AdminDashboard (AdminDashboard.jsx:2:20)
-    at renderWithHooks (chunk-R3VZBYWY.js?v=4961e7c7:11548:26)
-    at mountIndeterminateComponent (chunk-R3VZBYWY.js?v=4961e7c7:14926:21)
-    at beginWork (chunk-R3VZBYWY.js?v=4961e7c7:15914:22)
-    at HTMLUnknownElement.callCallback2 (chunk-R3VZBYWY.js?v=4961e7c7:3674:22)
-    at Object.invokeGuardedCallbackDev (chunk-R3VZBYWY.js?v=4961e7c7:3699:24)
-    at invokeGuardedCallback (chunk-R3VZBYWY.js?v=4961e7c7:3733:39)
-    at beginWork$1 (chunk-R3VZBYWY.js?v=4961e7c7:19765:15)
-    at performUnitOfWork (chunk-R3VZBYWY.js?v=4961e7c7:19198:20)
-    at workLoopSync (chunk-R3VZBYWY.js?v=4961e7c7:19137:13)
-chunk-R3VZBYWY.js?v=4961e7c7:14032 The above error occurred in the <AdminDashboard> component:
+:5173/src/components/AdminDashboard/AdminOrders.jsx:1  Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+Navigated to http://localhost:5173/
+AdminDashboard.jsx:22  GET http://localhost:5173/src/components/AdminDashboard/AdminOrders.jsx net::ERR_ABORTED 500 (Internal Server Error)
+Navigated to http://localhost:5173/
+AdminDashboard.jsx:22  GET http://localhost:5173/src/components/AdminDashboard/AdminOrders.jsx net::ERR_ABORTED 500 (Internal Server Error)
+Navigated to http://localhost:5173/
+AdminDashboard.jsx:22  GET http://localhost:5173/src/components/AdminDashboard/AdminOrders.jsx net::ERR_ABORTED 500 (Internal Server Error)
+Navigated to http://localhost:5173/
+AdminDashboard.jsx:22  GET http://localhost:5173/src/components/AdminDashboard/AdminOrders.jsx 500 (Internal Server Error)
+Navigated to http://localhost:5173/
+AdminDashboard.jsx:22  GET http://localhost:5173/src/components/AdminDashboard/AdminOrders.jsx net::ERR_ABORTED 500 (Internal Server Error)
+client:736  GET http://localhost:5173/ net::ERR_CONNECTION_REFUSED
+ping @ client:736
+waitForSuccessfulPing @ client:749
+(anonymous) @ client:561
+client:736  GET http://localhost:5173/ net::ERR_CONNECTION_REFUSED
+ping @ client:736
+waitForSuccessfulPing @ client:755
+await in waitForSuccessfulPing
+(anonymous) @ client:561
+client:736  GET http://localhost:5173/ net::ERR_CONNECTION_REFUSED
+ping @ client:736
+waitForSuccessfulPing @ client:755
+await in waitForSuccessfulPing
+(anonymous) @ client:561
+Navigated to http://localhost:5173/
+AdminDashboard.jsx:22  GET http://localhost:5173/src/components/AdminDashboard/AdminOrders.jsx net::ERR_ABORTED 500 (Internal Server Error)
 
-    at AdminDashboard (http://localhost:5173/src/components/AdminDashboard/AdminDashboard.jsx:20:20)
-    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=4961e7c7:4108:5)
-    at Routes (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=4961e7c7:4578:5)
-    at main
-    at div
-    at div
-    at CartProvider (http://localhost:5173/src/context/CartContext.jsx:20:32)
-    at AuthProvider (http://localhost:5173/src/context/AuthContext.jsx:21:25)
-    at Router (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=4961e7c7:4521:15)
-    at BrowserRouter (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=4961e7c7:5267:5)
-    at App
-    at ThemeProvider (http://localhost:5173/src/context/ThemeContext.jsx:20:33)
-
-Consider adding an error boundary to your tree to customize error handling behavior.
-Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
-logCapturedError @ chunk-R3VZBYWY.js?v=4961e7c7:14032
-chunk-R3VZBYWY.js?v=4961e7c7:19413 Uncaught ReferenceError: useContext is not defined
-    at AdminDashboard (AdminDashboard.jsx:2:20)
-    at renderWithHooks (chunk-R3VZBYWY.js?v=4961e7c7:11548:26)
-    at mountIndeterminateComponent (chunk-R3VZBYWY.js?v=4961e7c7:14926:21)
-    at beginWork (chunk-R3VZBYWY.js?v=4961e7c7:15914:22)
-    at beginWork$1 (chunk-R3VZBYWY.js?v=4961e7c7:19753:22)
-    at performUnitOfWork (chunk-R3VZBYWY.js?v=4961e7c7:19198:20)
-    at workLoopSync (chunk-R3VZBYWY.js?v=4961e7c7:19137:13)
-    at renderRootSync (chunk-R3VZBYWY.js?v=4961e7c7:19116:15)
-    at recoverFromConcurrentError (chunk-R3VZBYWY.js?v=4961e7c7:18736:28)
-    at performConcurrentWorkOnRoot (chunk-R3VZBYWY.js?v=4961e7c7:18684:30)
+[plugin:vite:import-analysis] Failed to resolve import "../../../context/AuthContext" from "src/components/AdminDashboard/AdminOrders.jsx". Does the file exist?
+C:/Users/ADMIN/Documents/GitHub/pharmasupply-blockchain/frontend/src/components/AdminDashboard/AdminOrders.jsx:3:28
+18 |  import React, { useState, useEffect, useContext } from "react";
+19 |  import axios from "axios";
+20 |  import { AuthContext } from "../../../context/AuthContext";
+   |                               ^
+21 |  import { toast } from "react-toastify";
+22 |  import { useNavigate } from "react-router-dom";
+    at TransformPluginContext._formatError (file:///C:/Users/ADMIN/Documents/GitHub/pharmasupply-blockchain/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+    at TransformPluginContext.error (file:///C:/Users/ADMIN/Documents/GitHub/pharmasupply-blockchain/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+    at normalizeUrl (file:///C:/Users/ADMIN/Documents/GitHub/pharmasupply-blockchain/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/ADMIN/Documents/GitHub/pharmasupply-blockchain/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+    at async Promise.all (index 5)
+    at async TransformPluginContext.transform (file:///C:/Users/ADMIN/Documents/GitHub/pharmasupply-blockchain/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+    at async PluginContainer.transform (file:///C:/Users/ADMIN/Documents/GitHub/pharmasupply-blockchain/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+    at async loadAndTransform (file:///C:/Users/ADMIN/Documents/GitHub/pharmasupply-blockchain/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+    at async viteTransformMiddleware (file:///C:/Users/ADMIN/Documents/GitHub/pharmasupply-blockchain/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24
+Click outside, press Esc key, or fix the code to dismiss.
+You can also disable this overlay by setting server.hmr.overlay to false in vite.config.js.
