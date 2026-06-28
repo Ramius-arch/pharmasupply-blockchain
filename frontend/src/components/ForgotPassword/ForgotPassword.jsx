@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import authService from '../../api/authService';
 import './ForgotPassword.css';
 
 const ForgotPassword = () => {
@@ -14,14 +15,14 @@ const ForgotPassword = () => {
       return;
     }
     setLoading(true);
-    //
-    // **NOTE**: This is a mock API call.
-    // In a real application, you would make a request to your backend to
-    // send a password reset email to the user.
-    //
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setLoading(false);
-    toast.success(`A password reset link has been sent to ${email}`);
+    try {
+      await authService.forgotPassword(email);
+      toast.success(`If an account exists, a reset link has been sent to ${email}`);
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to request password reset');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

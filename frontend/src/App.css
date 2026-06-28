@@ -11,43 +11,42 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, margin 0.3s ease;
+  transition: transform 300ms var(--ease-out), margin 300ms var(--ease-out);
 }
 
 .content-wrap {
   flex-grow: 1;
-  padding: 40px;
+  padding: 20px;
 }
 
+@media (min-width: 768px) {
+  .content-wrap {
+    padding: 44px 48px;
+  }
+}
+
+/* ─── Sidebar overlay (mobile) ─────────────────────────────── */
 .sidebar-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background: rgba(17, 76, 90, 0.30);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   z-index: 95;
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn 0.2s var(--ease-out);
 }
 
+/* ─── Responsive ───────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .main-content {
     margin-left: 0;
     width: 100%;
   }
 
-  .content-wrap {
-    padding: 24px 16px;
-  }
-
   .desktop-breadcrumb-wrap {
     display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .content-wrap {
-    padding: 16px 12px;
   }
 }

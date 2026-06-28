@@ -20,6 +20,24 @@ const authService = {
       throw error;
     }
   },
+  forgotPassword: async (email) => {
+    try {
+      const response = await axios.post('/api/auth/forgot-password', { email });
+      return response.data;
+    } catch (error) {
+      console.error('Forgot password error:', error);
+      throw error;
+    }
+  },
+  resetPassword: async (token, newPassword) => {
+    try {
+      const response = await axios.post('/api/auth/reset-password', { token, newPassword });
+      return response.data;
+    } catch (error) {
+      console.error('Reset password error:', error);
+      throw error;
+    }
+  },
 };
 
 export default authService;

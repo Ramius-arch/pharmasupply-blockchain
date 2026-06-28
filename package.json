@@ -6,7 +6,8 @@
   "workspaces": [
     "backend",
     "frontend",
-    "manager"
+    "manager",
+    "web3"
   ],
   "scripts": {
     "backend": "npm start --workspace=backend",
@@ -14,6 +15,8 @@
     "dev": "concurrently \"npm:backend\" \"npm:frontend\""
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.3.0",
+    "@swc/core": "^1.15.43",
     "concurrently": "^8.2.2"
   }
 }

@@ -8,49 +8,50 @@ jest.mock('../../models/user.model');
 jest.mock('../../utils/password.utils');
 jest.mock('jsonwebtoken');
 
-// Mock process.env for JWT_SECRET
-process.env.JWT_SECRET = 'testsecret';
-
+// Mock env config
+jest.mock('../../config/env', () => ({
+  JWT_SECRET: 'testsecret'
+}));
 
 describe('Auth Service', () => {
     beforeEach(() => {
-        // Clear all mocks before each test
         jest.clearAllMocks();
     });
 
     describe('registerUser', () => {
-        it('should successfully register a new user', async () => {
+        it('should successfully register a new user with default role', async () => {
             const userData = {
                 firstName: 'Test',
                 lastName: 'User',
                 email: 'test@example.com',
                 password: 'password123',
-                role: 'user',
+                role: 'admin', // attempt to self-elevate
             };
             const hashedPassword = 'hashedPassword123';
 
             hashPassword.mockResolvedValue(hashedPassword);
-            // Mock the User constructor and its save method
             User.mockImplementation(function() {
                 this.firstName = userData.firstName;
                 this.lastName = userData.lastName;
                 this.email = userData.email;
                 this.password = hashedPassword;
-                this.role = userData.role;
+                this.role = 'user';
                 this.save = jest.fn().mockResolvedValue(this);
-                this.toObject = jest.fn().mockReturnValue({ ...this }); // Mock toObject for Mongoose documents
+                this.toObject = jest.fn().mockReturnValue({ ...this });
             });
-
 
             const newUser = await authService.registerUser(userData);
 
             expect(hashPassword).toHaveBeenCalledWith(userData.password);
             expect(User).toHaveBeenCalledWith(expect.objectContaining({
-                ...userData,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                email: userData.email,
                 password: hashedPassword,
+                role: 'user'
             }));
             expect(newUser.email).toBe(userData.email);
-            expect(newUser.password).toBe(hashedPassword);
+            expect(newUser.role).toBe('user');
             expect(newUser.save).toHaveBeenCalledTimes(1);
         });
 
@@ -62,13 +63,12 @@ describe('Auth Service', () => {
                 toObject: jest.fn().mockReturnValue({}),
             }));
 
-            await expect(authService.registerUser(userData)).rejects.toThrow('Registration failed: Error: DB error');
+            await expect(authService.registerUser(userData)).rejects.toThrow('Registration failed: DB error');
         });
     });
 
     describe('loginUser', () => {
         const credentials = { email: 'test@example.com', password: 'password123' };
-        // Mock Mongoose document with toObject method
         const userInDb = {
             _id: 'someId',
             firstName: 'Test',
@@ -76,18 +76,17 @@ describe('Auth Service', () => {
             email: 'test@example.com',
             password: 'hashedPassword123',
             role: 'user',
-            toJSON: jest.fn().mockReturnValue({ // Use toJSON as Mongoose does
+            toJSON: jest.fn().mockReturnValue({
                 _id: 'someId',
                 firstName: 'Test',
                 lastName: 'User',
                 email: 'test@example.com',
-                password: 'hashedPassword123',
                 role: 'user',
             }),
         };
         const token = 'mockJwtToken';
 
-        it('should successfully log in a user', async () => {
+        it('should successfully log in a user and not expose password', async () => {
             User.findOne.mockResolvedValue(userInDb);
             comparePassword.mockResolvedValue(true);
             jwt.sign.mockReturnValue(token);
@@ -98,23 +97,25 @@ describe('Auth Service', () => {
             expect(comparePassword).toHaveBeenCalledWith(credentials.password, userInDb.password);
             expect(jwt.sign).toHaveBeenCalledWith(
                 { userId: userInDb._id, role: userInDb.role },
-                process.env.JWT_SECRET // Use process.env directly
+                'testsecret',
+                { expiresIn: '24h' }
             );
             expect(result).toEqual(expect.objectContaining({
                 email: userInDb.email,
                 token: token,
             }));
+            expect(result.password).toBeUndefined();
             expect(userInDb.toJSON).toHaveBeenCalledTimes(1);
         });
 
         it('should throw an error for invalid email', async () => {
-            User.findOne.mockResolvedValue(null); // User not found
+            User.findOne.mockResolvedValue(null);
             await expect(authService.loginUser(credentials)).rejects.toThrow('Login failed: Error: Invalid username or password');
         });
 
         it('should throw an error for invalid password', async () => {
             User.findOne.mockResolvedValue(userInDb);
-            comparePassword.mockResolvedValue(false); // Incorrect password
+            comparePassword.mockResolvedValue(false);
             await expect(authService.loginUser(credentials)).rejects.toThrow('Login failed: Error: Invalid username or password');
         });
 

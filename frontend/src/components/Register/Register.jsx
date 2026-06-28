@@ -13,11 +13,10 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
-  const { register } = useContext(AuthContext);
+  const { register, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,7 +27,7 @@ const Register = () => {
     if (!formData.firstName) newErrors.firstName = 'First name required';
     if (!formData.lastName) newErrors.lastName = 'Last name required';
     if (!formData.email) newErrors.email = 'Valid email required';
-    if (formData.password.length < 6) newErrors.password = 'Min 6 characters';
+    if (formData.password.length < 8) newErrors.password = 'Min 8 characters';
     if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Keys do not match';
     return newErrors;
   };
@@ -41,7 +40,6 @@ const Register = () => {
       return;
     }
 
-    setLoading(true);
     try {
       await register({
         firstName: formData.firstName,
@@ -53,8 +51,6 @@ const Register = () => {
       navigate('/login');
     } catch (error) {
       toast.error(error.message || 'Registration failed');
-    } finally {
-      setLoading(false);
     }
   };
 

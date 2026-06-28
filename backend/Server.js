@@ -7,9 +7,6 @@ const swaggerUi = require('swagger-ui-express');
 const yaml = require('yamljs');
 const path = require('path');
 
-// Add this to handle BigInt serialization globally
-BigInt.prototype.toJSON = function () { return this.toString(); };
-
 // Load configuration settings
 const config = require('./config');
 
@@ -19,18 +16,32 @@ const app = express();
 // Security headers
 app.use(helmet());
 
-// Rate limiting — 100 requests per 15 minutes per IP
-const limiter = rateLimit({
+// Rate limiting — general API: 100 requests per 15 minutes per IP
+const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
   message: { message: 'Too many requests, please try again later.' }
 });
-app.use('/api', limiter);
+app.use('/api', generalLimiter);
 
-// Enable CORS for all routes (for development only)
-app.use(cors());
+// Stricter rate limiting for authentication endpoints
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many authentication attempts. Please try again later.' }
+});
+app.use('/api/auth', authLimiter);
+
+// CORS: restrict to configured origin(s) in production
+const corsOrigin = process.env.CORS_ORIGIN || (config.NODE_ENV === 'development' ? true : false);
+app.use(cors({
+  origin: corsOrigin,
+  credentials: true
+}));
 
 // Parse JSON request bodies
 app.use(express.json({ limit: '10kb' })); // Limit body size to prevent abuse
@@ -79,6 +90,24 @@ app.use((err, req, res, next) => {
 
 // Start the server
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+// Graceful shutdown
+const shutdown = (signal) => {
+  console.log(`Received ${signal}. Shutting down gracefully...`);
+  server.close(async () => {
+    try {
+      await mongoose.connection.close(false);
+      console.log('MongoDB connection closed.');
+      process.exit(0);
+    } catch (err) {
+      console.error('Error during shutdown:', err);
+      process.exit(1);
+    }
+  });
+};
+
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));

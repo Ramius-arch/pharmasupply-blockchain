@@ -1,20 +1,10 @@
-const { generateWallet } = require('../../web3/utils'); // Adjust path as needed
 const catchAsync = require('../utils/catchAsync');
-const logger = require('../utils/logger'); // Assuming a logger utility exists
 
 exports.generateWallet = catchAsync(async (req, res) => {
-  const { address, privateKey } = generateWallet();
-  
-  // WARNING: Exposing private keys directly in API responses is highly insecure.
-  // In a real application, private keys should be managed on the client-side
-  // or secured with robust encryption and key management systems.
-  logger.warn('A new wallet private key was generated and exposed via API for demonstration purposes.');
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      address,
-      privateKey,
-    },
+  // Private keys must never be generated or handled by the server.
+  // The frontend should generate wallets locally using ethers.js or similar.
+  res.status(410).json({
+    status: 'error',
+    message: 'Server-side wallet generation has been disabled for security. Generate wallets in the client.'
   });
 });

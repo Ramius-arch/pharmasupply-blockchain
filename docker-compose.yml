@@ -1,44 +1,77 @@
 services:
+  mongodb:
+    image: mongo:7.0
+    container_name: pharmasupply-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: pharmasupply
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - pharmasupply-net
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   hardhat:
     build:
       context: ./web3
       dockerfile: Dockerfile
+    container_name: pharmasupply-hardhat
     ports:
       - "8545:8545"
     networks:
       - pharmasupply-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8545 -X POST -H 'Content-Type: application/json' -d '{\"jsonrpc\":\"2.0\",\"method\":\"net_version\",\"params\":[],\"id\":1}' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    container_name: pharmasupply-backend
     ports:
       - "3000:3000"
+    env_file:
+      - ./backend/.env
     environment:
-      - MONGODB_URI=mongodb://host.docker.internal:27017/pharmasupply
-      - JWT_SECRET=your-super-secret-key
-      - LOG_LEVEL=info
-      - PORT=3000
+      - MONGODB_URI=mongodb://mongodb:27017/pharmasupply
       - HARDHAT_RPC_URL=http://hardhat:8545
-      - DEV_PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
     depends_on:
-      - hardhat
+      mongodb:
+        condition: service_healthy
+      hardhat:
+        condition: service_healthy
     networks:
       - pharmasupply-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:3000/api-docs || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    container_name: pharmasupply-frontend
     ports:
-      - "5173:5173"
+      - "5173:80"
     depends_on:
       - backend
     networks:
       - pharmasupply-net
-    environment:
-      - VITE_API_BASE_URL=http://localhost:3000
 
 networks:
   pharmasupply-net:
     driver: bridge
+
+volumes:
+  mongodb-data:

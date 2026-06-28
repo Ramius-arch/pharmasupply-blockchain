@@ -63,9 +63,26 @@ const getBlockchainItemHistory = async (itemId, token) => {
   }
 };
 
+// Function to get all blockchain transactions (events log)
+const getTransactions = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/transactions`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching blockchain transactions:', error);
+    throw error;
+  }
+};
+
 export default {
   createBlockchainItem,
   getBlockchainItemDetails,
   updateBlockchainItemStatus,
   getBlockchainItemHistory,
+  getTransactions,
 };
+

@@ -1,20 +1,29 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18-slim
+# Build stage
+FROM node:18-slim AS builder
 
-# Set the working directory in the container
-WORKDIR /usr/src/app/frontend
+WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
-
-# Install any needed packages
 RUN npm install
 
-# Copy the rest of the frontend source code
 COPY . .
+RUN npm run build
 
-# Make port 5173 available to the world outside this container
-EXPOSE 5173
+# Production stage
+FROM nginx:alpine
 
-# Define the command to run the app
-CMD ["npm", "run", "dev", "--", "--host"]
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
+
+# Copy a minimal nginx config to support React Router
+RUN echo 'server { \
+  listen 80; \
+  location / { \
+    root /usr/share/nginx/html; \
+    index index.html; \
+    try_files $uri $uri/ /index.html; \
+  } \
+}' > /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

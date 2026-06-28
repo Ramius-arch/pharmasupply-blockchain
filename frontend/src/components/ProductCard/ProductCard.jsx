@@ -1,21 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './ProductCard.css'; // Import component-specific CSS
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight, faPills } from '@fortawesome/free-solid-svg-icons';
+import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
-  const imgUrl = product.image || 'https://picsum.photos/seed/' + product.id + '/400/300?grayscale';
+  const imgUrl = product.image || `https://picsum.photos/seed/${product.id}/400/300?grayscale`;
 
   return (
-    <div className="product-card animate-fade-in">
-      <Link to={`/products/${product.id}`} className="product-image-link">
-        <img src={imgUrl} alt={product.name} className="product-image" />
+    <article className="product-card animate-fade-in">
+      <Link to={`/products/${product.id}`} className="product-image-link" aria-label={`View ${product.name}`}>
+        <img src={imgUrl} alt={product.name} className="product-image" loading="lazy" />
       </Link>
       <div className="product-info">
-        <h3 className="product-name">{product.name}</h3>
+        <div className="product-meta">
+          {product.category && <span className="product-category">{product.category}</span>}
+          {product.manufacturer && <span className="product-manufacturer">{product.manufacturer}</span>}
+        </div>
+        <h3 className="product-name">
+          <FontAwesomeIcon icon={faPills} className="product-icon" />
+          {product.name}
+        </h3>
         <div className="product-price">${(product.price / 100).toFixed(2)}</div>
-        <Link to={`/products/${product.id}`} className="btn btn-outline" style={{ width: '100%' }}>View Details</Link>
+        <Link to={`/products/${product.id}`} className="btn btn-outline product-btn">
+          View Details <FontAwesomeIcon icon={faArrowRight} />
+        </Link>
       </div>
-    </div>
+    </article>
   );
 };
 

@@ -1,5 +1,5 @@
 module.exports = {
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'], // For @testing-library/jest-dom extensions
   moduleNameMapper: {
     '\.(css|less|scss|sass)$': 'identity-obj-proxy', // Mock CSS imports

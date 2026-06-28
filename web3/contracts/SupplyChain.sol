@@ -1,8 +1,13 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-contract SupplyChain {
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+
+contract SupplyChain is AccessControl {
     enum Status { Created, InTransit, Delivered, Canceled }
+
+    bytes32 public constant SUPPLIER_ROLE = keccak256("SUPPLIER_ROLE");
+    bytes32 public constant COURIER_ROLE = keccak256("COURIER_ROLE");
 
     struct Item {
         uint256 id;
@@ -34,7 +39,18 @@ contract SupplyChain {
         _;
     }
 
-    function createItem(string memory _description) public returns (uint256) {
+    constructor(address admin) {
+        require(admin != address(0), "Admin cannot be zero address");
+        _grantRole(DEFAULT_ADMIN_ROLE, admin);
+        _setRoleAdmin(SUPPLIER_ROLE, DEFAULT_ADMIN_ROLE);
+        _setRoleAdmin(COURIER_ROLE, DEFAULT_ADMIN_ROLE);
+    }
+
+    function createItem(string memory _description)
+        public
+        onlyRole(SUPPLIER_ROLE)
+        returns (uint256)
+    {
         _itemCounter++;
         uint256 newItemId = _itemCounter;
 
@@ -55,13 +71,14 @@ contract SupplyChain {
         public
         itemExists(_itemId)
         onlyValidStatus(_newStatus)
+        onlyRole(COURIER_ROLE)
     {
         require(items[_itemId].status != _newStatus, "Item is already in this status");
         require(items[_itemId].status != Status.Delivered, "Cannot update status of a delivered item");
-        
+
         items[_itemId].status = _newStatus;
         items[_itemId].lastUpdated = block.timestamp;
-        
+
         _addStatusHistory(_itemId, _newStatus);
 
         emit ItemStatusUpdated(_itemId, _newStatus, msg.sender);

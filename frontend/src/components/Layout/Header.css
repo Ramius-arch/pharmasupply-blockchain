@@ -1,6 +1,8 @@
 .app-header {
-  height: 64px;
-  background-color: var(--surface);
+  height: 68px;
+  background: rgba(23, 43, 54, 0.90);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -9,9 +11,26 @@
   position: sticky;
   top: 0;
   z-index: 2000;
-  backdrop-filter: blur(10px);
 }
 
+/* subtle orange bottom accent */
+.app-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 136, 1, 0.30) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ─── Left cluster ─────────────────────────────────────────── */
 .header-left {
   display: flex;
   align-items: center;
@@ -21,61 +40,143 @@
 .hamburger-btn {
   background: none;
   border: none;
-  color: var(--text-primary);
-  font-size: 1.25rem;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
   cursor: pointer;
-  padding: 8px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  transition: var(--transition);
+  border-radius: var(--radius-sm);
+  transition:
+    color            var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .hamburger-btn:hover {
-  background: var(--surface-hover);
+  color: var(--off-white);
+  background: rgba(255, 136, 1, 0.08);
 }
 
+.hamburger-btn:active { transform: scale(0.95); }
+
+/* ─── Logo ─────────────────────────────────────────────────── */
 .header-logo a {
   text-decoration: none;
   display: flex;
   align-items: center;
 }
 
-.logo-full {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.5px;
-}
-
+.logo-full,
 .logo-short {
-  display: none;
-  font-size: 1.1rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.5px;
+  background: linear-gradient(
+    135deg,
+    var(--off-white)     0%,
+    var(--accent-orange) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
 }
 
+.logo-short { display: none; }
+
+/* ─── Right cluster ────────────────────────────────────────── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-profile-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-fast),
+    color            var(--transition-fast);
+}
+
+.profile-trigger:hover {
+  background: var(--surface-hover);
+  color: var(--off-white);
+}
+
+.profile-trigger svg { font-size: 1.2rem; }
+
+/* ─── Logout ───────────────────────────────────────────────── */
+.logout-btn-header {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  color: var(--danger);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.83rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition:
+    background-color var(--transition-fast),
+    border-color     var(--transition-fast),
+    transform        var(--transition-fast);
+}
+
+.logout-btn-header:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: var(--danger);
+}
+
+.logout-btn-header:active { transform: scale(0.95); }
+
+/* ─── Login link ───────────────────────────────────────────── */
+.login-link-header {
+  color: var(--accent-orange);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-accent);
+  background: var(--primary-soft);
+  transition:
+    background-color var(--transition-fast),
+    color            var(--transition-fast),
+    box-shadow       var(--transition-fast);
+}
+
+.login-link-header:hover {
+  background: var(--accent-orange);
+  color: var(--navy);
+  box-shadow: 0 0 18px var(--glow-orange);
+}
+
+.logout-label { display: inline; }
+
+/* ─── Responsive ───────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .logo-full {
-    display: none;
-  }
-  
-  .logo-short {
-    display: block;
-  }
-  
-  .app-header {
-    padding: 0 16px;
-  }
-...
+  .logo-full  { display: none; }
+  .logo-short { display: block; }
+  .app-header { padding: 0 16px; }
+  .user-name-small { display: none; }
+}
 
-  .header-actions {
-    gap: 12px;
-  }
-
-  .user-name-small {
-    display: none;
-  }
+@media (max-width: 480px) {
+  .logout-label { display: none; }
 }

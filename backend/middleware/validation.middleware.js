@@ -9,9 +9,9 @@ const registerSchema = Joi.object({
     .messages({ 'string.empty': 'Last name is required' }),
   email: Joi.string().email().required()
     .messages({ 'string.email': 'A valid email is required' }),
-  password: Joi.string().min(6).max(128).required()
-    .messages({ 'string.min': 'Password must be at least 6 characters' }),
-  role: Joi.string().valid('admin', 'supplier', 'user').optional()
+  password: Joi.string().min(8).max(128).required()
+    .messages({ 'string.min': 'Password must be at least 8 characters' })
+  // role is intentionally removed — all registrations default to 'user'
 });
 
 const loginSchema = Joi.object({
@@ -19,6 +19,18 @@ const loginSchema = Joi.object({
     .messages({ 'string.email': 'A valid email is required' }),
   password: Joi.string().required()
     .messages({ 'string.empty': 'Password is required' })
+});
+
+const forgotPasswordSchema = Joi.object({
+  email: Joi.string().email().required()
+    .messages({ 'string.email': 'A valid email is required' })
+});
+
+const resetPasswordSchema = Joi.object({
+  token: Joi.string().hex().length(64).required()
+    .messages({ 'string.length': 'Invalid reset token' }),
+  newPassword: Joi.string().min(8).max(128).required()
+    .messages({ 'string.min': 'Password must be at least 8 characters' })
 });
 
 // ─── Product Schemas ──────────────────────────────────────────────────────────
@@ -98,6 +110,8 @@ module.exports = {
   validate,
   registerSchema,
   loginSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
   createProductSchema,
   createOrderSchema,
   updateStatusSchema

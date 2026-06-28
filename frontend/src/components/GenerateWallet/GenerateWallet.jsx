@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { ethers } from 'ethers';
 import { toast } from 'react-toastify';
-import './GenerateWallet.css'; // Import component-specific CSS
+import './GenerateWallet.css';
 
 const GenerateWallet = () => {
   const [address, setAddress] = useState('');
@@ -16,10 +16,11 @@ const GenerateWallet = () => {
     setPrivateKey('');
 
     try {
-      const response = await axios.post('/api/wallet/generate');
-      setAddress(response.data.data.address);
-      setPrivateKey(response.data.data.privateKey);
-      toast.success('New wallet generated!');
+      // Generate the wallet locally in the browser. The private key never leaves this device.
+      const wallet = ethers.Wallet.createRandom();
+      setAddress(wallet.address);
+      setPrivateKey(wallet.privateKey);
+      toast.success('New wallet generated locally!');
     } catch (err) {
       console.error('Error generating wallet:', err);
       setError('Failed to generate wallet. Please try again.');

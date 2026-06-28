@@ -53,26 +53,12 @@ describe('Product Service', () => {
             expect(createdProduct._id).toBe('mockProductId');
         });
 
-        it('should create a product even if blockchain item creation fails', async () => {
+        it('should not save the product if blockchain item creation fails', async () => {
             const productData = { name: 'Product without Blockchain', description: 'Desc', unitPrice: 50 };
             blockchainService.createItemOnBlockchain.mockRejectedValue(new Error('Blockchain error'));
-            
-            // Mock console.error to prevent it from cluttering test output and to check it was called
-            const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-            const createdProduct = await productService.createProduct(productData);
-
-            expect(Product).toHaveBeenCalledWith(expect.objectContaining(productData));
+            await expect(productService.createProduct(productData)).rejects.toThrow('Blockchain error');
             expect(blockchainService.createItemOnBlockchain).toHaveBeenCalledWith(productData.name);
-            // blockchainItemId should NOT be set if blockchain call fails
-            expect(createdProduct.blockchainItemId).toBeUndefined();
-            expect(createdProduct.save).toHaveBeenCalledTimes(1);
-            expect(createdProduct.name).toBe(productData.name);
-            expect(consoleErrorSpy).toHaveBeenCalledWith(
-                "Failed to create blockchain item for product:",
-                expect.any(Error)
-            );
-            consoleErrorSpy.mockRestore(); // Restore original console.error
         });
     });
 

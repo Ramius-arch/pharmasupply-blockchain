@@ -66,15 +66,24 @@ This project is a monorepo containing several interconnected services:
 
 #### Backend
 Create a `.env` file in the `backend` directory based on `.env.example`:
+```bash
+cp backend/.env.example backend/.env
 ```
-# .env file in backend/
+Required variables:
+```
+NODE_ENV=development
 MONGODB_URI=mongodb://localhost:27017/pharmasupply
-JWT_SECRET=your-jwt-secret
+JWT_SECRET=change-me-to-a-strong-random-secret
 LOG_LEVEL=info
 PORT=3000
-DEV_PRIVATE_KEY="0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
+HARDHAT_RPC_URL=http://127.0.0.1:8545
+DEV_PRIVATE_KEY=          # backend signer private key (dev only — use KMS/HSM in production)
+CORS_ORIGIN=http://localhost:5173
 ```
-**Note:** Ensure your `MONGODB_URI` points to a running MongoDB instance.
+**Security notes:**
+- Never commit `.env` or real private keys to source control.
+- `DEV_PRIVATE_KEY` is used by the backend to sign blockchain transactions. In production, replace this with a KMS/HSM signer.
+- New users always register with the `user` role. Promote accounts to `supplier` or `admin` via `PATCH /api/users/:id/role` as an existing admin.
 
 ## Running the Full Stack
 
@@ -112,6 +121,8 @@ cd web3
 npx hardhat run scripts/deploy.js --network localhost
 ```
 This will create a `contract-address.json` file in the `web3` directory. The backend will automatically use the address and ABI from this file.
+
+**Access control:** The contract now uses OpenZeppelin `AccessControl`. The deployer is the admin and can grant `SUPPLIER_ROLE` and `COURIER_ROLE`. The backend signing wallet must hold the appropriate role to create items or update statuses.
 
 #### Step 3: Run the Demo Transaction Generation Script (after contract deployment)
 In another new terminal, navigate to the `web3` directory and run the script to generate approximately 300 demo transactions:

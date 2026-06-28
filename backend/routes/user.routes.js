@@ -34,5 +34,12 @@ router.put(
     userController.updateUserProfile
 );
 
+// Admin-only route to change a user's role
+router.patch(
+    '/:userId/role',
+    authenticate,
+    checkRole(['admin']),
+    userController.updateUserRole
+);
 
 module.exports = router;

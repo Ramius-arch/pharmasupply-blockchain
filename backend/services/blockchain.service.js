@@ -1,4 +1,5 @@
 const { ethers } = require("ethers");
+const env = require('../config/env');
 const { SUPPLY_CHAIN_CONTRACT_ADDRESS, SUPPLY_CHAIN_CONTRACT_ABI } = require('../config/blockchain');
 
 /**
@@ -48,28 +49,35 @@ const ContractStatus = {
   Canceled: 3,
 };
 
+if (!SUPPLY_CHAIN_CONTRACT_ADDRESS || !SUPPLY_CHAIN_CONTRACT_ABI) {
+  console.warn('Blockchain contract address or ABI is missing. Blockchain features will be unavailable.');
+}
+
+if (!env.DEV_PRIVATE_KEY) {
+  console.warn('DEV_PRIVATE_KEY is not set. Blockchain write operations will be unavailable.');
+}
+
 /**
- * @dev Initializes an Ethers.js provider to connect to the local Hardhat network.
- *      The Hardhat network typically runs on http://127.0.0.1:8545/.
+ * @dev Initializes an Ethers.js provider from the configured RPC URL.
  */
-const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+const provider = new ethers.JsonRpcProvider(env.HARDHAT_RPC_URL);
 
 /**
  * @dev Initializes an Ethers.js Wallet instance to sign transactions.
- *      For development, the private key of Account #0 (deployer) from the Hardhat node is used.
- *      In a production environment, this would be handled securely (e.g., KMS, hardware wallet).
+ *      For development, the private key from environment variables is used.
+ *      In production, this should be replaced with a KMS/HSM signer.
  */
-const signer = new ethers.Wallet(process.env.DEV_PRIVATE_KEY, provider);
+const signer = env.DEV_PRIVATE_KEY
+  ? new ethers.Wallet(env.DEV_PRIVATE_KEY, provider)
+  : null;
 
 /**
  * @dev Creates an Ethers.js Contract instance for the SupplyChain smart contract.
  *      This instance is used to interact with the deployed contract on the blockchain.
  */
-const supplyChainContract = new ethers.Contract(
-  SUPPLY_CHAIN_CONTRACT_ADDRESS,
-  SUPPLY_CHAIN_CONTRACT_ABI,
-  signer
-);
+const supplyChainContract = SUPPLY_CHAIN_CONTRACT_ADDRESS && SUPPLY_CHAIN_CONTRACT_ABI && signer
+  ? new ethers.Contract(SUPPLY_CHAIN_CONTRACT_ADDRESS, SUPPLY_CHAIN_CONTRACT_ABI, signer)
+  : null;
 
 /**
  * @dev Service function to create a new item on the blockchain.
@@ -79,6 +87,9 @@ const supplyChainContract = new ethers.Contract(
  * @throws {Error} If the transaction fails or the item ID cannot be retrieved.
  */
 exports.createItemOnBlockchain = async (description) => {
+  if (!supplyChainContract) {
+    throw new Error('Blockchain contract is not configured');
+  }
   try {
     const tx = await supplyChainContract.createItem(description);
     const receipt = await tx.wait(); // Wait for the transaction to be mined
@@ -122,6 +133,9 @@ exports.createItemOnBlockchain = async (description) => {
  * @throws {Error} If the newStatus is invalid or the transaction fails.
  */
 exports.updateItemStatusOnBlockchain = async (itemId, newStatus) => {
+  if (!supplyChainContract) {
+    throw new Error('Blockchain contract is not configured');
+  }
   try {
     // Convert string status to its corresponding blockchain enum value.
     const statusValue = ContractStatus[newStatus]; 
@@ -145,6 +159,9 @@ exports.updateItemStatusOnBlockchain = async (itemId, newStatus) => {
  * @throws {Error} If the item cannot be retrieved from the blockchain.
  */
 exports.getItemFromBlockchain = async (itemId) => {
+  if (!supplyChainContract) {
+    throw new Error('Blockchain contract is not configured');
+  }
   try {
     const item = await supplyChainContract.getItem(itemId);
     // Convert BigInts from Solidity to JavaScript numbers/strings and enum value to string.
@@ -168,6 +185,9 @@ exports.getItemFromBlockchain = async (itemId) => {
  * @throws {Error} If the item history cannot be retrieved from the blockchain.
  */
 exports.getItemHistoryFromBlockchain = async (itemId) => {
+  if (!supplyChainContract) {
+    throw new Error('Blockchain contract is not configured');
+  }
   try {
     const history = await supplyChainContract.getItemHistory(itemId);
     // Map raw history data to a more readable format.
@@ -188,6 +208,9 @@ exports.getItemHistoryFromBlockchain = async (itemId) => {
  * @throws {Error} If events cannot be retrieved from the blockchain.
  */
 exports.getBlockchainTransactions = async () => {
+  if (!supplyChainContract) {
+    throw new Error('Blockchain contract is not configured');
+  }
   try {
     // Define filters for the events we are interested in
     const itemCreatedFilter = supplyChainContract.filters.ItemCreated();

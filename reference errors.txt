@@ -1,37 +1,530 @@
- Downloading cache...
-==> It looks like we don't have access to your repo, but we'll try to clone it anyway.
-==> Cloning from https://github.com/Ramius-arch/PharmaSupply-Chain
-==> Checking out commit 28bcb471862802793729e08146797d6fde9bf5bd in branch main
-==> Downloaded 167MB in 4s. Extraction took 4s.
-==> Using Node.js version 24.14.1 (default)
-==> Docs on specifying a Node.js version: https://render.com/docs/node-version
-==> Running build command 'cd backend && npm install && node seeders/seed.js'...
-added 5 packages, removed 4 packages, changed 3 packages, and audited 210 packages in 37s
-35 packages are looking for funding
-  run `npm fund` for details
-2 vulnerabilities (1 moderate, 1 high)
-To address all issues (including breaking changes), run:
-  npm audit fix --force
-Run `npm audit` for details.
-node:internal/modules/cjs/loader:1459
-  throw err;
-  ^
-Error: Cannot find module '@faker-js/faker'
-Require stack:
-- /opt/render/project/src/backend/seeders/seed.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1456:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
-    at Module._load (node:internal/modules/cjs/loader:1242:25)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
-    at Module.require (node:internal/modules/cjs/loader:1556:12)
-    at require (node:internal/modules/helpers:152:16)
-    at Object.<anonymous> (/opt/render/project/src/backend/seeders/seed.js:2:19)
-    at Module._compile (node:internal/modules/cjs/loader:1812:14)
-    at Object..js (node:internal/modules/cjs/loader:1943:10) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [ '/opt/render/project/src/backend/seeders/seed.js' ]
-}
-Node.js v24.14.1
-==> Build failed 😞
-==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+api/blockchain/transactions:1  Failed to load resource: the server responded with a status of 404 (Not Found)
+api/blockchain/transactions:1  Failed to load resource: the server responded with a status of 404 (Not Found)
+userService.js:7  GET http://localhost:5173/api/users 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ userService.js:7
+(anonymous) @ UserManagement.jsx:18
+(anonymous) @ UserManagement.jsx:27
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:24
+(anonymous) @ ProductManagement.jsx:31
+(anonymous) @ ProductManagement.jsx:40
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+userService.js:7  GET http://localhost:5173/api/users 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ userService.js:7
+(anonymous) @ UserManagement.jsx:18
+(anonymous) @ UserManagement.jsx:27
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:24
+(anonymous) @ ProductManagement.jsx:31
+(anonymous) @ ProductManagement.jsx:40
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ ProductManagement.jsx:31
+(anonymous) @ ProductManagement.jsx:40
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ ProductManagement.jsx:31
+(anonymous) @ ProductManagement.jsx:40
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ ProductManagement.jsx:31
+(anonymous) @ ProductManagement.jsx:40
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ ProductManagement.jsx:31
+(anonymous) @ ProductManagement.jsx:40
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ ProductManagement.jsx:31
+(anonymous) @ ProductManagement.jsx:40
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ ProductManagement.jsx:31
+(anonymous) @ ProductManagement.jsx:40
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+TransactionHistory.jsx:79  GET http://localhost:5173/api/blockchain/transactions 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ TransactionHistory.jsx:79
+(anonymous) @ TransactionHistory.jsx:94
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+TransactionHistory.jsx:79  GET http://localhost:5173/api/blockchain/transactions 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ TransactionHistory.jsx:79
+(anonymous) @ TransactionHistory.jsx:94
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:24
+(anonymous) @ Product.jsx:15
+(anonymous) @ Product.jsx:26
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:24
+(anonymous) @ Product.jsx:15
+(anonymous) @ Product.jsx:26
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ Product.jsx:15
+(anonymous) @ Product.jsx:26
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ Product.jsx:15
+(anonymous) @ Product.jsx:26
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ Product.jsx:15
+(anonymous) @ Product.jsx:26
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ Product.jsx:15
+(anonymous) @ Product.jsx:26
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ Product.jsx:15
+(anonymous) @ Product.jsx:26
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+commitPassiveMountOnFiber @ chunk-GNC7SI6A.js?v=3fba2b10:18156
+commitPassiveMountEffects_complete @ chunk-GNC7SI6A.js?v=3fba2b10:18129
+commitPassiveMountEffects_begin @ chunk-GNC7SI6A.js?v=3fba2b10:18119
+commitPassiveMountEffects @ chunk-GNC7SI6A.js?v=3fba2b10:18109
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19490
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627
+productService.js:26  GET http://localhost:5173/api/products 404 (Not Found)
+dispatchXhrRequest @ axios.js?v=db100e66:2104
+xhr @ axios.js?v=db100e66:1964
+dispatchRequest @ axios.js?v=db100e66:2805
+_request @ axios.js?v=db100e66:3060
+request @ axios.js?v=db100e66:2926
+Axios.<computed> @ axios.js?v=db100e66:3079
+wrap @ axios.js?v=db100e66:8
+(anonymous) @ productService.js:26
+(anonymous) @ productService.js:9
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:14
+await in (anonymous)
+(anonymous) @ productService.js:24
+(anonymous) @ Product.jsx:15
+(anonymous) @ Product.jsx:26
+commitHookEffectListMount @ chunk-GNC7SI6A.js?v=3fba2b10:16915
+invokePassiveEffectMountInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:18324
+invokeEffectsInDev @ chunk-GNC7SI6A.js?v=3fba2b10:19701
+commitDoubleInvokeEffectsInDEV @ chunk-GNC7SI6A.js?v=3fba2b10:19686
+flushPassiveEffectsImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19503
+flushPassiveEffects @ chunk-GNC7SI6A.js?v=3fba2b10:19447
+commitRootImpl @ chunk-GNC7SI6A.js?v=3fba2b10:19416
+commitRoot @ chunk-GNC7SI6A.js?v=3fba2b10:19277
+performSyncWorkOnRoot @ chunk-GNC7SI6A.js?v=3fba2b10:18895
+flushSyncCallbacks @ chunk-GNC7SI6A.js?v=3fba2b10:9119
+(anonymous) @ chunk-GNC7SI6A.js?v=3fba2b10:18627

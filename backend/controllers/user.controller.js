@@ -1,4 +1,4 @@
-const { getUserProfile, updateUserProfile } = require('../services/user.service');
+const { getUserProfile, updateUserProfile, updateUserRole } = require('../services/user.service');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/apiError');
 
@@ -23,4 +23,19 @@ exports.updateUserProfile = catchAsync(async (req, res) => {
     throw new AppError('User not found', 404);
   }
   res.status(200).json({ message: 'Profile updated successfully', data: updatedUser });
+});
+
+exports.updateUserRole = catchAsync(async (req, res) => {
+  const { userId } = req.params;
+  const { role } = req.body;
+
+  if (!role || !['admin', 'supplier', 'user'].includes(role)) {
+    throw new AppError('A valid role is required', 400);
+  }
+
+  const updatedUser = await updateUserRole(userId, role);
+  if (!updatedUser) {
+    throw new AppError('User not found', 404);
+  }
+  res.status(200).json({ message: 'Role updated successfully', data: updatedUser });
 });

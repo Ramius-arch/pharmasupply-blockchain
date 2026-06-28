@@ -18,13 +18,9 @@ exports.createProduct = async (productData) => {
     const product = new Product(productData);
 
     // Create item on blockchain
-    let blockchainItemId;
-    try {
-        blockchainItemId = await blockchainService.createItemOnBlockchain(product.name);
-        product.blockchainItemId = blockchainItemId;
-    } catch (error) {
-        console.error("Failed to create blockchain item for product:", error);
-    }
+    // If this fails, we do NOT save the product — DB and chain must stay consistent.
+    const blockchainItemId = await blockchainService.createItemOnBlockchain(product.name);
+    product.blockchainItemId = blockchainItemId;
 
     return await product.save();
 };

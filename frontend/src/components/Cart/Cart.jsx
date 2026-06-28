@@ -47,7 +47,7 @@ const Cart = () => {
             <div>
               {/* Remove from cart button */}
               <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
-                Remove <FontAwesomeIcon icon={FaTrash} />
+                Remove <FontAwesomeIcon icon={faTrash} />
               </button>
             </div>
           </div>

@@ -16,6 +16,17 @@ const Checkout = () => {
   const { user, loading: isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState({
+    firstName: user?.firstName || '',
+    lastName: user?.lastName || '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    phoneNumber: user?.phone || ''
+  });
+  const [paymentMethod, setPaymentMethod] = useState('credit');
 
   // Calculate total amount
   const totalAmount = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -33,19 +44,6 @@ const Checkout = () => {
       </div>
     );
   }
-
-  const [shippingAddress, setShippingAddress] = useState({
-    firstName: user.firstName || '',
-    lastName: user.lastName || '',
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    phoneNumber: user.phone || ''
-  });
-
-  const [paymentMethod, setPaymentMethod] = useState('credit');
 
   const handleShippingChange = (e) => {
     setShippingAddress({
